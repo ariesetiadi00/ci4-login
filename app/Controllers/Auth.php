@@ -98,15 +98,27 @@ class Auth extends BaseController
                 'errors' => [
                     'is_unique' => 'Email already registered'
                 ]
+            ],
+            'gender' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Please select your gender'
+                ]
             ]
         ])) {
             return redirect()->to('register')->withInput();
         } else {
+            if ($this->request->getVar('gender') == 'male') {
+                $defaultImg = 'd-male.png';
+            } else if ($this->request->getVar('gender') == 'female') {
+                $defaultImg = 'd-female.png';
+            }
             $data = [
                 'id' => 0,
                 'name' => $this->request->getVar('name'),
                 'email' => $this->request->getVar('email'),
-                'image' => 'default.jpg',
+                'gender' => $this->request->getVar('gender'),
+                'image' => $defaultImg,
                 'name' => $this->request->getVar('name'),
                 'password' => password_hash($this->request->getVar('password1'), PASSWORD_DEFAULT),
                 'role_id' => 2,

@@ -32,8 +32,17 @@
                                             <?= $validation->getError('email') ?>
                                         </div>
                                     </div>
+                                    <!-- Jenis Kelamin -->
+                                    <div class="custom-control custom-radio d-inline-block mr-4">
+                                        <input type="radio" value="male" id="male" name="gender" class="custom-control-input" required>
+                                        <label class="custom-control-label" for="male">Male</label>
+                                    </div>
+                                    <div class="custom-control custom-radio d-inline-block">
+                                        <input type="radio" value="female" id="female" name="gender" class="custom-control-input" required>
+                                        <label class="custom-control-label" for="female">Female</label>
+                                    </div>
                                     <!-- Pass -->
-                                    <div class="row">
+                                    <div class="row mt-3">
                                         <div class="form-group col-6">
                                             <input type="password" class="form-control <?= ($validation->hasError('password2')) ? 'is-invalid' : '' ?>" name="password1" id="password1" placeholder="Password" required autocomplete="off">
                                             <div class="invalid-feedback">
