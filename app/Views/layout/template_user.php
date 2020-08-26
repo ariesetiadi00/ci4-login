@@ -45,26 +45,27 @@
                 Admin
             </div>
 
-            <!-- Nav Item - Dashboard -->
+            <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/admin">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
             <!-- Heading -->
             <div class="sidebar-heading">
                 Interface
             </div>
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="/member/index">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Members</span></a>
+            </li> -->
+            <li class="nav-item">
+                <a class="nav-link" href="/user">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>My Profile</span></a>
             </li>
 
             <!-- Divider -->

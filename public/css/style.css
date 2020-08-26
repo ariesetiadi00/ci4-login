@@ -7,6 +7,6 @@
 .t-profile {
   margin: 0 auto;
 }
-.t-profile tr td {
-  margin: 0 40px;
+td {
+  padding: 0 15px;
 }
