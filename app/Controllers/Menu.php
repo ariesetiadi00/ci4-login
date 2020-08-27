@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\UserModel;
 
-class User extends BaseController
+class Menu extends BaseController
 {
     protected $userModel;
     public function __construct()
@@ -21,8 +21,8 @@ class User extends BaseController
 
         $data = [
             'user' => $user,
-            'title' => 'Profile'
+            'title' => 'Menu Management'
         ];
-        return view('user/index', $data);
+        return view('menu/index', $data);
     }
 }

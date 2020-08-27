@@ -3,16 +3,20 @@
 namespace App\Controllers;
 
 use App\Models\MemberModel;
+use App\Models\UserModel;
 
 class Member extends BaseController
 {
     protected $memberModel;
+    protected $userModel;
     public function __construct()
     {
         $this->memberModel = new MemberModel();
+        $this->userModel = new UserModel();
     }
-    public function index()
+    public function index($id)
     {
+        $user = $this->userModel->find($id);
         $key = $this->request->getVar('key');
         if ($key) {
             $member = $this->memberModel->search($key)->getResultArray();
@@ -22,9 +26,10 @@ class Member extends BaseController
         }
 
         $data = [
-            'title' => 'Members',
+            'title' => 'Member',
             'member' => $member,
-            'key' => $key
+            'key' => $key,
+            'user' => $user
         ];
         return view('member/index', $data);
     }

@@ -1,17 +1,19 @@
-<?= $this->extend('layout/template_user'); ?>
+<?= $this->extend('layout/template_main'); ?>
 
 <?= $this->section('content'); ?>
 <?php $i = 1 ?>
-<table>
-    <tr>
-        <td>No</td>
-        <td>Name</td>
-    </tr>
-    <?php foreach ($member as $m) : ?>
+<div class="card px-3 w-75">
+    <table class="table">
         <tr>
-            <td><?= $i++ ?></td>
-            <td><?= $m['name'] ?></td>
+            <th>No</th>
+            <th>Name</th>
         </tr>
-    <?php endforeach; ?>
-</table>
+        <?php foreach ($member as $m) : ?>
+            <tr>
+                <td><?= $i++ ?></td>
+                <td><?= $m['name'] ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</div>
 <?= $this->endSection(); ?>

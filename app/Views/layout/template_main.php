@@ -12,12 +12,12 @@
     <title><?= $title ?></title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -30,7 +30,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= ($user['role_id'] == 1) ? '/admin' : '/user' ?>">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-baseball-ball"></i>
                 </div>
@@ -40,41 +40,61 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Admin
-            </div>
+            <!-- Dinamic Menu -->
 
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="/admin">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Interface
-            </div>
+            <?php
+            $db = \Config\Database::connect();
+            $roleId = $user['role_id'];
+            $queryMenu = "SELECT `user_menu`.`id`, `menu`
+                            FROM `user_menu` JOIN `user_access_menu` 
+                            ON `user_menu`.`id` = `user_access_menu`.`menu_id`
+                            WHERE `user_access_menu`.`role_id` = $roleId
+                            ORDER BY `user_access_menu`.`menu_id` ASC
+                            ";
 
-            <!-- Nav Item - Charts -->
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="/member/index">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Members</span></a>
-            </li> -->
-            <li class="nav-item">
-                <a class="nav-link" href="/user">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>My Profile</span></a>
-            </li>
+            $menu = $db->query($queryMenu)->getResultArray();
+            ?>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+            <!-- Looping Menu -->
+            <?php foreach ($menu as $m) : ?>
+                <div class="sidebar-heading">
+                    <?= $m['menu'] ?>
+                </div>
 
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+                <!-- Looping Sub-Menu Base on Menu -->
+                <?php
+                $menuId = $m['id'];
+                $querySubMenu = "SELECT * 
+                                FROM `user_sub_menu`
+                                WHERE `menu_id` = $menuId
+                                AND `is_active` = 1
+                                ";
+                $subMenu = $db->query($querySubMenu)->getResultArray();
+                ?>
+                <?php foreach ($subMenu as $sm) : ?>
+                    <?php
+                    $subTitle = $sm['title'];
+                    $id = $user['id'];
+                    ?>
+                    <?php if ($title == $subTitle) : ?>
+                        <li class="nav-item active">
+                        <?php else : ?>
+                        <li class="nav-item">
+                        <?php endif; ?>
+                        <a class="nav-link" href="/<?= ($subTitle == 'Member') ? $sm['url'] . '/' . $id : $sm['url'] ?>">
+                            <i class="<?= $sm['icon'] ?>"></i>
+                            <span><?= $sm['title'] ?></span></a>
+                        </li>
+                    <?php endforeach; ?>
+                    <hr class="sidebar-divider d-none d-md-block">
+                <?php endforeach; ?>
+
+                <!-- Divider -->
+
+                <!-- Sidebar Toggler (Sidebar) -->
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>
 
         </ul>
         <!-- End of Sidebar -->
@@ -107,26 +127,6 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
@@ -191,15 +191,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Logout</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Press OK to logout</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="/auth/logout">Logout</a>
+                    <a class="btn btn-primary" href="/auth/logout">OK</a>
                 </div>
             </div>
         </div>
