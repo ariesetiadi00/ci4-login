@@ -1,6 +1,7 @@
 <?= $this->extend('layout/template_main'); ?>
 
 <?= $this->section('content'); ?>
+<h1>Profile</h1>
 <div>
     <div class="row">
         <div class="col-md-3 d-flex justify-content-center">

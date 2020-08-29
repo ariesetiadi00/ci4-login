@@ -7,9 +7,12 @@ use App\Models\UserModel;
 class Menu extends BaseController
 {
     protected $userModel;
+    protected $db;
+
     public function __construct()
     {
         $this->userModel = new UserModel();
+        $this->db = \Config\Database::connect();
     }
     public function index()
     {
@@ -21,7 +24,8 @@ class Menu extends BaseController
 
         $data = [
             'user' => $user,
-            'title' => 'Menu Management'
+            'title' => 'Menu Management',
+            'menu' => $this->db->query("SELECT * FROM user_menu")->getResultArray()
         ];
         return view('menu/index', $data);
     }
