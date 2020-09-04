@@ -8,5 +8,5 @@ class UserModel extends Model
 {
     protected $table = 'user';
     protected $useTimestamp = true;
-    protected $allowedFields = ['name', 'email', 'gender', 'image', 'password', 'role_id', 'is_active', 'date_created'];
+    protected $allowedFields = ['name', 'email', 'gender', 'image', 'password', 'role_id', 'is_active', 'created_at', 'updated_at'];
 }

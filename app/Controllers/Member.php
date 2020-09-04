@@ -14,8 +14,10 @@ class Member extends BaseController
         $this->memberModel = new MemberModel();
         $this->userModel = new UserModel();
     }
-    public function index($id)
+    public function index()
     {
+        $data = session()->get('data');
+        $id = $data['user_id'];
         $user = $this->userModel->find($id);
         $key = $this->request->getVar('key');
         if ($key) {

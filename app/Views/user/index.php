@@ -5,7 +5,7 @@
 <div>
     <div class="row">
         <div class="col-md-3 d-flex justify-content-center">
-            <img src="img/profile/<?= $user['image'] ?>" alt="Profile" class="rounded-circle d-profile m-3">
+            <img src="/img/profile/<?= $user['image'] ?>" alt="Profile" class="rounded-circle d-profile m-3">
         </div>
         <div class="card col-md-5">
             <div class="card-body">
@@ -22,7 +22,7 @@
                         <td>Join on</td>
                         <td> : </td>
                         <td>
-                            <p class="card-text"><?= date('j F Y', strtotime($user['date_created'])) ?></p>
+                            <p class="card-text"><?= date('j F Y', strtotime($user['created_at'])) ?></p>
                         </td>
                     </tr>
                     <tr>
