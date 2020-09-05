@@ -29,4 +29,8 @@ class Menu extends BaseController
         ];
         return view('menu/index', $data);
     }
+    public function add()
+    {
+        d($this->request->getVar());
+    }
 }
