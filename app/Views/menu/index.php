@@ -10,6 +10,17 @@
 
 <!-- Button trigger modal -->
 
+<!-- Message -->
+<?php if (session()->getFlashData('strong') != null) : ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong><?= session()->getFlashData('strong') ?></strong> <?= session()->getFlashData('message') ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php endif; ?>
+<!-- End Maessage -->
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -54,7 +65,7 @@
                 <td><?= $m['menu'] ?></td>
                 <td>
                     <a href="#" class="btn">Edit</a>
-                    <a href="#" class="btn btn-danger">Delete</a>
+                    <a href="/menu/delete/<?= $m['id'] ?>" class="btn btn-danger" onclick="return confirm('Delete this menu ?')">Delete</a>
                 </td>
             </tr>
         </tbody>

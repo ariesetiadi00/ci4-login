@@ -31,6 +31,20 @@ class Menu extends BaseController
     }
     public function add()
     {
-        d($this->request->getVar());
+        $menu = [
+            'menu' => $this->request->getVar()
+        ];
+        $this->db->table('user_menu')->insert($menu);
+        session()->setFlashData('strong', 'Insert');
+        session()->setFlashData('message', 'Success');
+        return redirect()->to('/menu/index');
+    }
+
+    public function delete($id)
+    {
+        $this->db->table('user_menu')->where('id', $id)->delete();
+        session()->setFlashData('strong', 'Delete');
+        session()->setFlashData('message', 'Success');
+        return redirect()->to('/menu/index');
     }
 }
