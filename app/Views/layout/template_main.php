@@ -207,8 +207,14 @@
     <!-- Core plugin JavaScript-->
     <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
+    <!-- j Query CDN -->
+    <!-- <script src="<script src=" https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>"></script> -->
+
     <!-- Custom scripts for all pages-->
     <script src="/js/sb-admin-2.min.js"></script>
+
+    <!-- Custom Script -->
+    <script src="/js/script.js"></script>
 
 </body>
 

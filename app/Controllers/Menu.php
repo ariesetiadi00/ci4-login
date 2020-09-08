@@ -14,6 +14,7 @@ class Menu extends BaseController
         $this->userModel = new UserModel();
         $this->db = \Config\Database::connect();
     }
+
     public function index()
     {
         if ((session()->get('data')) == null) {
@@ -29,6 +30,7 @@ class Menu extends BaseController
         ];
         return view('menu/index', $data);
     }
+
     public function add()
     {
         $menu = [
@@ -38,6 +40,10 @@ class Menu extends BaseController
         session()->setFlashData('strong', 'Insert');
         session()->setFlashData('message', 'Success');
         return redirect()->to('/menu/index');
+    }
+
+    public function edit($id)
+    {
     }
 
     public function delete($id)

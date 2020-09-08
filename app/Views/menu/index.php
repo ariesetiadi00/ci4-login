@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 <div>
     <h1>Menu Management</h1>
-    <button type="button" class="btn btn-primary w-25 my-2" data-toggle="modal" data-target="#exampleModal">
+    <button type="button" class="addButton btn btn-primary w-25 my-2" data-toggle="modal" data-target="#menuModal">
         Add New Menu
     </button>
 </div>
@@ -22,11 +22,11 @@
 <!-- End Maessage -->
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add New Menu</h5>
+                <h5 class="modal-title" id="menulabel">Add New Menu</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -38,8 +38,8 @@
                         <input type="text" class="form-control" name="menu_name" id="menu_name" placeholder="Menu Name" required autocomplete="off" ">
                     </div>
                     <div class=" modal-footer">
-                        <button type="submit" class="btn btn-primary btn-block">
-                            Save Changes
+                        <button id="menuButton" type="submit" class="btn btn-primary btn-block">
+                            Submit
                         </button>
                     </div>
                 </form>
@@ -64,8 +64,8 @@
                 <th scope="row"><?= $i++ ?></th>
                 <td><?= $m['menu'] ?></td>
                 <td>
-                    <a href="#" class="btn">Edit</a>
-                    <a href="/menu/delete/<?= $m['id'] ?>" class="btn btn-danger" onclick="return confirm('Delete this menu ?')">Delete</a>
+                    <a id="editButton" href="/menu/edit/<?= $m['id'] ?>" data-toggle="modal" data-target="#menuModal" class="btn">Edit</a>
+                    <a id="deleteButton" href="/menu/delete/<?= $m['id'] ?>" class="btn btn-danger" onclick="return confirm('Delete this menu ?')">Delete</a>
                 </td>
             </tr>
         </tbody>
