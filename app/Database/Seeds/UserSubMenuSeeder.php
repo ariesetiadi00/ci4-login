@@ -33,13 +33,6 @@ class UserSubMenuSeeder extends Seeder
 			],
 			[
 				'menu_id' => 3,
-				'title' => 'Menu Management',
-				'url' => 'menu',
-				'icon' => 'fas fa-fw fa-folder',
-				'is_active' => 1
-			],
-			[
-				'menu_id' => 4,
 				'title' => 'Sign Out',
 				'url' => 'auth/logout',
 				'icon' => 'fas fa-sign-out-alt',

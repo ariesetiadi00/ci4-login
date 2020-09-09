@@ -17,10 +17,7 @@ class UserMenuSeeder extends Seeder
 				'menu' => 'Member'
 			],
 			[
-				'menu' => 'Menu'
-			],
-			[
-				'menu' => 'Sign Out'
+				'menu' => 'Account'
 			]
 		];
 		$this->db->table('user_menu')->insertBatch($data);

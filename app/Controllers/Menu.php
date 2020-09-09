@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use phpDocumentor\Reflection\Types\This;
 
 class Menu extends BaseController
 {
@@ -42,8 +43,21 @@ class Menu extends BaseController
         return redirect()->to('/menu/index');
     }
 
-    public function edit($id)
+    public function edit()
     {
+        // Catch Data
+        $id = $this->request->getVar('id');
+        $data = [
+            'menu' => $this->request->getVar('menu_name')
+        ];
+
+        // Update Data
+        $this->db->table('user_menu')->where('id', $id)->update($data);
+
+        // Redirect
+        session()->setFlashData('strong', 'Update');
+        session()->setFlashData('message', 'Success');
+        return redirect()->to('/menu/index');
     }
 
     public function delete($id)
@@ -52,5 +66,11 @@ class Menu extends BaseController
         session()->setFlashData('strong', 'Delete');
         session()->setFlashData('message', 'Success');
         return redirect()->to('/menu/index');
+    }
+
+    public function get()
+    {
+        $id = $_POST['id'];
+        echo json_encode($this->db->query("SELECT * FROM user_menu WHERE id = $id")->getResultArray());
     }
 }

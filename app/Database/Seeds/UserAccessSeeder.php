@@ -28,12 +28,8 @@ class UserAccessSeeder extends Seeder
 			],
 			[
 				'role_id' => 2,
-				'menu_id' => 4
+				'menu_id' => 3
 			],
-			[
-				'role_id' => 1,
-				'menu_id' => 4
-			]
 		];
 		$this->db->table('user_access_menu')->insertBatch($data);
 	}

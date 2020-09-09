@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 <div>
     <h1>Menu Management</h1>
-    <button type="button" class="addButton btn btn-primary w-25 my-2" data-toggle="modal" data-target="#menuModal">
+    <button type="button" id="addButton" class="btn btn-primary w-25 my-2" data-toggle="modal" data-target="#menuModal">
         Add New Menu
     </button>
 </div>
@@ -26,7 +26,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="menulabel">Add New Menu</h5>
+                <h5 class="modal-title" id="menuLabel">Add New Menu</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -34,6 +34,7 @@
             <div class="modal-body">
                 <!-- Start Form -->
                 <form action="/menu/add" method="POST" class="user">
+                    <input type="hidden" id="id" name="id">
                     <div class="form-group">
                         <input type="text" class="form-control" name="menu_name" id="menu_name" placeholder="Menu Name" required autocomplete="off" ">
                     </div>
@@ -64,7 +65,7 @@
                 <th scope="row"><?= $i++ ?></th>
                 <td><?= $m['menu'] ?></td>
                 <td>
-                    <a id="editButton" href="/menu/edit/<?= $m['id'] ?>" data-toggle="modal" data-target="#menuModal" class="btn">Edit</a>
+                    <a id="editButton" href="/menu/edit/<?= $m['id'] ?>" data-toggle="modal" data-target="#menuModal" class="btn editButton" data-id="<?= $m['id'] ?>">Edit</a>
                     <a id="deleteButton" href="/menu/delete/<?= $m['id'] ?>" class="btn btn-danger" onclick="return confirm('Delete this menu ?')">Delete</a>
                 </td>
             </tr>

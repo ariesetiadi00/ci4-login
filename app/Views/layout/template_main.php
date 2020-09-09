@@ -62,7 +62,7 @@
                     <?= $m['menu'] ?>
                 </div>
 
-                <!-- Looping Sub-Menu Base on Menu -->
+                <!-- Query Sub-Menu Base on Menu -->
                 <?php
                 $menuId = $m['id'];
                 $querySubMenu = "SELECT * 
@@ -72,22 +72,38 @@
                                 ";
                 $subMenu = $db->query($querySubMenu)->getResultArray();
                 ?>
+                <!-- Looping Sub Menu -->
                 <?php foreach ($subMenu as $sm) : ?>
-                    <?php
-                    $subTitle = $sm['title'];
-                    $id = $user['id'];
-                    ?>
-                    <?php if ($title == $subTitle) : ?>
+
+                    <!--  Highlight menu if selected -->
+                    <?php if ($title == $sm['title']) : ?>
                         <li class="nav-item active">
                         <?php else : ?>
                         <li class="nav-item">
                         <?php endif; ?>
-                        <a class="nav-link" href="/<?= $sm['url'] ?>/">
-                            <i class="<?= $sm['icon'] ?>"></i>
-                            <span><?= $sm['title'] ?></span></a>
+
+                        <!-- Print Submenu data -->
+                        <!-- If menu sign out/ return confirm -->
+                        <?php if ($sm['title'] == 'Sign Out') : ?>
+                            <a class="nav-link" href="/<?= $sm['url'] ?>/" data-toggle="modal" data-target="#logoutModal">
+                                <i class="<?= $sm['icon'] ?>"></i>
+                                <span>
+                                    <?= $sm['title'] ?>
+                                </span>
+                            </a>
+                        <?php else : ?>
+                            <a class="nav-link" href="/<?= $sm['url'] ?>/">
+                                <i class="<?= $sm['icon'] ?>"></i>
+                                <span>
+                                    <?= $sm['title'] ?>
+                                </span>
+                            </a>
+                        <?php endif; ?>
                         </li>
                     <?php endforeach; ?>
+
                     <hr class="sidebar-divider d-none d-md-block">
+
                 <?php endforeach; ?>
 
 
@@ -213,8 +229,8 @@
     <!-- Custom scripts for all pages-->
     <script src="/js/sb-admin-2.min.js"></script>
 
-    <!-- Custom Script -->
-    <script src="/js/script.js"></script>
+    <script src="/js/memberScript.js"></script>
+
 
 </body>
 
