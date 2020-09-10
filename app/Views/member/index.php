@@ -4,7 +4,7 @@
 <?php $i = 1 ?>
 <h1>Member</h1>
 <div class="my-3">
-    <a href="/member/create" class="addButton btn btn-primary" data-toggle="modal" data-target="#memberModal">Add New Member</a>
+    <a href="/member/create" class="add-button btn btn-primary" data-toggle="modal" data-target="#memberModal">Add New Member</a>
 </div>
 
 <!-- Message -->
@@ -29,7 +29,8 @@
             <td><?= $i++ ?></td>
             <td><?= $m['name'] ?></td>
             <td>
-                <a href="/member/edit" class="editButton btn" data-toggle="modal" data-target="#memberModal" data-id="<?= $m['id'] ?>">Edit</a>
+                <a href="/member/get" class="detail-button btn" data-toggle="modal" data-target="#detailMemberModal" data-id="<?= $m['id'] ?>">Detail</a>
+                <a href="/member/edit" class="edit-button btn" data-toggle="modal" data-target="#memberModal" data-id="<?= $m['id'] ?>">Edit</a>
                 <a href="/member/delete/<?= $m['id'] ?>" class="deleteButton btn btn-danger" onclick="return confirm('Delete Member')">Delete</a>
             </td>
         </tr>
@@ -39,7 +40,7 @@
 
 
 
-<!-- Modal -->
+<!-- Member Insert and Update Modal-->
 <div class="modal fade" id="memberModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -68,8 +69,39 @@
     </div>
 </div>
 
-<!-- Bootstrap core JavaScript-->
-<!-- <script src="/vendor/jquery/jquery.min.js"></script>
-<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/js/memberScript.js"></script> -->
+<!-- Get Member Detail Modal -->
+<div class="modal fade" id="detailMemberModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="memberLabel">Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col my-2">
+                            <h2 class="member-name">Arie Setiadi</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 text-center p-2">
+                            <img class="member-image w-75 rounded-circle c-shadow" src="/img/profile/d-male.png" alt="Profile">
+                        </div>
+                        <div class="member-desc col-lg-8 text-center p-2 align-self-center">
+                            <h5>Member Detail</h5>
+                            <h5>Member Detail</h5>
+                            <h5>Member Detail</h5>
+                            <h5>Member Detail</h5>
+                            <h5>Member Detail</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?= $this->endSection(); ?>

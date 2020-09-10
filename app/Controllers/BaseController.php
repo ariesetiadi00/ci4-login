@@ -16,6 +16,7 @@ namespace App\Controllers;
  */
 
 use CodeIgniter\Controller;
+use CodeIgniter\I18n\Time;
 
 class BaseController extends Controller
 {
@@ -27,7 +28,7 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = [];
+	protected $helpers = ['php'];
 
 	/**
 	 * Constructor.
@@ -43,5 +44,15 @@ class BaseController extends Controller
 		// E.g.:
 		// $this->session = \Config\Services::session();
 		session();
+
+
+		// d($_SESSION['data']);
+
+		// if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 1800)) {
+		// 	// last request was more than 30 minutes ago
+		// 	session_unset();     // unset $_SESSION variable for the run-time 
+		// 	session_destroy();   // destroy session data in storage
+		// }
+		// $_SESSION['data'] = time();
 	}
 }
