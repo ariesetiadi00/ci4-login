@@ -11,7 +11,13 @@
   margin: 0 auto;
 }
 td,
-th {
-  padding: 0 15px;
+th,
+tr {
   text-align: center;
+}
+.middle-div {
+  vertical-align: middle;
+}
+.center-div {
+  margin: 0 auto;
 }

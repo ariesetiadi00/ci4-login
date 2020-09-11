@@ -4,22 +4,20 @@ namespace App\Controllers;
 
 use App\Models\MemberModel;
 use App\Models\UserModel;
-use CodeIgniter\I18n\Time;
 
 class Member extends BaseController
 {
     protected $memberModel;
     protected $userModel;
-    protected $db;
 
     public function __construct()
     {
         $this->memberModel = new MemberModel();
         $this->userModel = new UserModel();
-        $this->db = \Config\Database::connect();
     }
     public function index()
     {
+
         $data = session()->get('data');
         $id = $data['user_id'];
         $user = $this->userModel->find($id);
@@ -35,7 +33,8 @@ class Member extends BaseController
             'title' => 'Member',
             'member' => $member,
             'key' => $key,
-            'user' => $user
+            'user' => $user,
+            'time' => $this->time->getMonth()
         ];
         return view('member/index', $data);
     }
@@ -46,8 +45,8 @@ class Member extends BaseController
 
         $this->memberModel->save([
             'name' => $name,
-            'created_at' => Time::now(),
-            'updated_at' => Time::now()
+            'created_at' => $this->time::now(),
+            'updated_at' => $this->time::now()
         ]);
 
         session()->setFlashData('strong', 'Insert');

@@ -29,6 +29,9 @@ class BaseController extends Controller
 	 * @var array
 	 */
 	protected $helpers = ['php'];
+	protected $time;
+	protected $db;
+
 
 	/**
 	 * Constructor.
@@ -44,6 +47,10 @@ class BaseController extends Controller
 		// E.g.:
 		// $this->session = \Config\Services::session();
 		session();
+		$this->time = new Time();
+		$this->db = \Config\Database::connect();
+
+
 
 
 		// d($_SESSION['data']);
