@@ -44,8 +44,10 @@
             <td class="middle-div"><?= $i++ ?></td>
             <td class="middle-div"><?= $m['name'] ?></td>
             <!-- <td class="badge badge-success"> -->
-            <td class="middle-div">
-                <?= date('F', mktime($time)) ?>
+            <td>
+                <div class="btn btn-sm <?= ($data) ? 'btn-success' : 'btn-danger' ?>">
+                    <?= date('F', mktime($time)) ?>
+                </div>
             </td>
             <td class="middle-div">
                 <a href="/member/get" class="detail-button btn btn-sm" data-toggle="modal" data-target="#detailMemberModal" data-id="<?= $m['id'] ?>">Detail</a>
@@ -124,7 +126,7 @@
                         <div class="col">
                             <form class="pay" action="/payment/" method="post">
                                 <input class="id" type="hidden" name="id">
-                                <button class="btn btn-block btn-success" type="submit" id="pay" name="pay" onclick='return confirm("Confirm payment from this member")'>
+                                <button class="btn btn-block btn-success <?= (!$data) ? 'disabled' : '' ?>" type="submit" id="pay" name="pay" onclick='return confirm("Confirm payment from this member")'>
                                     Confirm Payment
                                 </button>
                             </form>
