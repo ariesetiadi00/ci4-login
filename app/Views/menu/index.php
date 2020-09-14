@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 <div>
     <h1>Menu Management</h1>
-    <button type="button" id="addButton" class="btn btn-primary w-25 my-2" data-toggle="modal" data-target="#menuModal">
+    <button type="button" class="btn btn-primary w-25 my-2 add-button" data-toggle="modal" data-target="#menuModal">
         Add New Menu
     </button>
 </div>
@@ -65,8 +65,8 @@
                 <th scope="row"><?= $i++ ?></th>
                 <td><?= $m['menu'] ?></td>
                 <td>
-                    <a id="editButton" href="/menu/edit/<?= $m['id'] ?>" data-toggle="modal" data-target="#menuModal" class="btn editButton" data-id="<?= $m['id'] ?>">Edit</a>
-                    <a id="deleteButton" href="/menu/delete/<?= $m['id'] ?>" class="btn btn-danger" onclick="return confirm('Delete this menu ?')">Delete</a>
+                    <a href="/menu/edit/<?= $m['id'] ?>" data-toggle="modal" data-target="#menuModal" class="btn edit-button" data-id="<?= $m['id'] ?>">Edit</a>
+                    <a href="/menu/delete/<?= $m['id'] ?>" class="btn btn-danger" onclick="return confirm('Delete this menu ?')">Delete</a>
                 </td>
             </tr>
         </tbody>

@@ -7,6 +7,9 @@ $(function () {
   $(".add-button").on("click", function () {
     memberLabel.textContent = "Add New Member";
     memberButton.textContent = "Submit";
+
+    $("#id").val("");
+    $("input#name").val("");
   });
   // Edit Clicked
   $(".edit-button").on("click", function () {

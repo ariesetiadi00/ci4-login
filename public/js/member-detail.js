@@ -11,6 +11,9 @@ $(function () {
       dataType: "json",
       success: function (member) {
         $(".member-name").html(member[0].name);
+
+        // Send ID Member
+        $("input.id").val(member[0].id);
       },
     });
   });

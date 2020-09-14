@@ -25,6 +25,21 @@
         <th></th>
     </tr>
     <?php foreach ($member as $m) : ?>
+
+        <!-- Get payment data per member -->
+        <?php
+
+        $id = $m['id'];
+
+        $query = "SELECT * FROM member 
+                INNER JOIN member_payment 
+                ON member.id = member_payment.member_id 
+                WHERE member.id = $id 
+                AND member_payment.month = $time";
+        $data = $db->query($query)->getResultArray();
+        ?>
+
+
         <tr>
             <td class="middle-div"><?= $i++ ?></td>
             <td class="middle-div"><?= $m['name'] ?></td>
@@ -107,8 +122,11 @@
                     <hr>
                     <div class="row">
                         <div class="col">
-                            <form action="/payment/" method="post">
-                                <button class="btn btn-block btn-success" type="submit" id="pay" name="pay">Confirm Payment</button>
+                            <form class="pay" action="/payment/" method="post">
+                                <input class="id" type="hidden" name="id">
+                                <button class="btn btn-block btn-success" type="submit" id="pay" name="pay" onclick='return confirm("Confirm payment from this member")'>
+                                    Confirm Payment
+                                </button>
                             </form>
                         </div>
                     </div>

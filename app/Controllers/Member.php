@@ -34,11 +34,11 @@ class Member extends BaseController
             'member' => $member,
             'key' => $key,
             'user' => $user,
-            'time' => $this->time->getMonth()
+            'time' => $this->time->getMonth(),
+            'db' => $this->db
         ];
         return view('member/index', $data);
     }
-
     public function create()
     {
         $name = $this->request->getVar('name');
