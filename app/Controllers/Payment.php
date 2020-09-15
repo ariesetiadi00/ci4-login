@@ -1,7 +1,4 @@
-
 <?php
-
-switch
 
 namespace App\Controllers;
 

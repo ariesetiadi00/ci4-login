@@ -93,4 +93,8 @@ class Member extends BaseController
 
         echo json_encode($member);
     }
+
+    // public function get_status(){
+
+    // }
 }

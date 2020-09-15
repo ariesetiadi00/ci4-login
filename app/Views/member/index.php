@@ -31,6 +31,8 @@
 
         $id = $m['id'];
 
+        // Select this member on today's month.
+        // If 1 => Paid // If 0 => Not Paid
         $query = "SELECT * FROM member 
                 INNER JOIN member_payment 
                 ON member.id = member_payment.member_id 
@@ -44,8 +46,10 @@
             <td class="middle-div"><?= $i++ ?></td>
             <td class="middle-div"><?= $m['name'] ?></td>
             <!-- <td class="badge badge-success"> -->
-            <td class="middle-div">
-                <?= date('F', mktime($time)) ?>
+            <td>
+                <div class="btn btn-sm <?= ($data) ? 'btn-success' : 'btn-danger' ?>">
+                    <?= date('F', mktime($time)) ?>
+                </div>
             </td>
             <td class="middle-div">
                 <a href="/member/get" class="detail-button btn btn-sm" data-toggle="modal" data-target="#detailMemberModal" data-id="<?= $m['id'] ?>">Detail</a>
@@ -124,9 +128,19 @@
                         <div class="col">
                             <form class="pay" action="/payment/" method="post">
                                 <input class="id" type="hidden" name="id">
-                                <button class="btn btn-block btn-success" type="submit" id="pay" name="pay" onclick='return confirm("Confirm payment from this member")'>
-                                    Confirm Payment
-                                </button>
+                                <!-- Check status member -->
+                                <?php if ($data == 1) : ?>
+                                    <!-- If Paid, Disable button -->
+                                    <button class="btn btn-block btn-success" type="submit" id="pay" name="pay" onclick='return confirm("Confirm payment from this member ?")' disabled>
+
+                                        <!-- If Not paid, enable button -->
+                                    <?php else : ?>
+                                        <button class="btn btn-block btn-success" type="submit" id="pay" name="pay" onclick='return confirm("Confirm payment from this member ?")'>
+                                        <?php endif; ?>
+                                        Confirm Payment
+                                        </button>
+
+                                        <!-- Fixing in javascript later -->
                             </form>
                         </div>
                     </div>
