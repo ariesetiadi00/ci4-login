@@ -24,6 +24,7 @@
         <th>Status</th>
         <th></th>
     </tr>
+    <?php $data = 1; ?>
     <?php foreach ($member as $m) : ?>
 
         <!-- Get payment data per member -->
@@ -128,19 +129,11 @@
                         <div class="col">
                             <form class="pay" action="/payment/" method="post">
                                 <input class="id" type="hidden" name="id">
-                                <!-- Check status member -->
-                                <?php if ($data == 1) : ?>
-                                    <!-- If Paid, Disable button -->
-                                    <button class="btn btn-block btn-success" type="submit" id="pay" name="pay" onclick='return confirm("Confirm payment from this member ?")' disabled>
 
-                                        <!-- If Not paid, enable button -->
-                                    <?php else : ?>
-                                        <button class="btn btn-block btn-success" type="submit" id="pay" name="pay" onclick='return confirm("Confirm payment from this member ?")'>
-                                        <?php endif; ?>
-                                        Confirm Payment
-                                        </button>
+                                <button class="confirm-button btn btn-block btn-success" type="submit" id="pay" name="pay" onclick='return confirm("Confirm payment from this member ?")'>
+                                    Confirm Payment
+                                </button>
 
-                                        <!-- Fixing in javascript later -->
                             </form>
                         </div>
                     </div>

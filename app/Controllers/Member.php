@@ -4,35 +4,33 @@ namespace App\Controllers;
 
 use App\Models\MemberModel;
 use App\Models\UserModel;
+use CodeIgniter\I18n\Time;
 
 class Member extends BaseController
 {
     protected $memberModel;
     protected $userModel;
+    protected $time;
 
     public function __construct()
     {
         $this->memberModel = new MemberModel();
         $this->userModel = new UserModel();
+        $this->time = new Time();
     }
     public function index()
     {
 
-        $data = session()->get('data');
-        $id = $data['user_id'];
+        $id = session()->get('data')['user_id'];
+
         $user = $this->userModel->find($id);
-        $key = $this->request->getVar('key');
-        if ($key) {
-            $member = $this->memberModel->search($key)->getResultArray();
-            // $member = $this->memberModel->like('nama', $key);
-        } else {
-            $member = $this->memberModel->findAll();
-        }
+
+        $member = $this->memberModel->findAll();
+
 
         $data = [
             'title' => 'Member',
             'member' => $member,
-            'key' => $key,
             'user' => $user,
             'time' => $this->time->getMonth(),
             'db' => $this->db
@@ -88,13 +86,19 @@ class Member extends BaseController
     public function get()
     {
         $id = $_POST['id'];
-        $member = $this->db->query("SELECT * FROM member WHERE id = $id")->getResultArray();
+        $time = $this->time->getMonth();
+
+        $query_1 = "SELECT * FROM member WHERE id = $id";
+        $query_2 = "SELECT * FROM member 
+                    INNER JOIN member_payment 
+                    ON member.id = member_payment.member_id 
+                    WHERE member.id = $id 
+                    AND member_payment.month = $time";
+
+        $member = $this->db->query($query_1)->getResultArray();
+        $status = $this->db->query($query_2)->getResultArray();
 
 
-        echo json_encode($member);
+        echo json_encode(array('member' => $member, 'status' => $status));
     }
-
-    // public function get_status(){
-
-    // }
 }

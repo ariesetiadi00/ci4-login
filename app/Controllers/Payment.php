@@ -6,12 +6,12 @@ class Payment extends BaseController
 {
     public function index()
     {
-
+        $price = 400000;
         // Database = [id, member_id, pay_desc, date_time, amount]
         $data = [
             'member_id' => $this->request->getVar('id'),
             'month' => $this->time->getMonth(),
-            'amount' => 400000,
+            'amount' => $price,
             'created_at' => $this->time->now()
         ];
 
