@@ -1,7 +1,7 @@
 <?= $this->extend('layout/template_main'); ?>
 <?= $this->section('content'); ?>
 <?php $i = 1 ?>
-<h1>Member</h1>
+<!-- <h1>Member</h1> -->
 <div class="my-3">
     <a href="/member/create" class="add-button btn btn-sm btn-primary" data-toggle="modal" data-target="#memberModal">Add New Member</a>
 </div>
