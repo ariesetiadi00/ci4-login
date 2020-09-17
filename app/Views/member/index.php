@@ -142,31 +142,6 @@
                         <div class="col">
                             <h6 class="text-center">Payment History</h6>
                             <table class="table payment-history">
-
-                                <!-- <tr>
-                                    <td>2</td>
-                                    <td>Payment in July</td>
-                                    <td>29 July 2020</td>
-                                    <td>Rp. 400.000</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Payment in August</td>
-                                    <td>29 June 2020</td>
-                                    <td>Rp. 400.000</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Payment in September</td>
-                                    <td>29 September 2020</td>
-                                    <td>Rp. 400.000</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Payment in October</td>
-                                    <td>29 October 2020</td>
-                                    <td>Rp. 400.000</td>
-                                </tr> -->
                             </table>
                         </div>
                     </div>

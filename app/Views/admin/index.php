@@ -48,7 +48,6 @@
 <div class="text-center mb-3">
     <i class="fas fa-list-alt"></i>
     Payment History
-    <!-- <span class="text-center">Payment History</span> -->
 </div>
 
 <table class="table">
@@ -64,8 +63,8 @@
         <tr>
             <td><?= $i++ ?></td>
             <td><?= $p['name'] ?></td>
-            <td>Payment in <?= date('F', mktime($p['month'])) ?></td>
-            <td><?= date("j F Y - g:i a", strtotime($p['created_at'])) ?></td>
+            <td>Payment in <?= date('F', mktime(0, 0, 0, $p['month'])) ?></td>
+            <td><?= date("j F Y - H:i", strtotime($p['created_at'])) ?></td>
             <td>Rp. <?= number_format($p['amount'], 2) ?>
             <td>
         </tr>

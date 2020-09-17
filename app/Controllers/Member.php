@@ -97,6 +97,7 @@ class Member extends BaseController
                     ON member.id = member_payment.member_id 
                     WHERE member.id = $id 
                     AND member_payment.month = $time";
+
         // Select all this member  payment history
         $query_3 = "SELECT * FROM member_payment
                     WHERE member_payment.member_id = $id";
@@ -104,7 +105,6 @@ class Member extends BaseController
         $member = $this->db->query($query_1)->getResultArray();
         $status = $this->db->query($query_2)->getResultArray();
         $history = $this->db->query($query_3)->getResultArray();
-
 
         echo json_encode(array('member' => $member, 'status' => $status, 'history' => $history));
     }

@@ -28,32 +28,23 @@ $(function () {
           $(".confirm-button").attr("disabled", false).html("Confirm Payment");
         }
 
-        // console.log(history);
-        // Looping member payment history
-
-        // var obj = {
-        //   "flammable": "inflammable",
-        //   "duh": "no duh"
-        // };
-        // $.each(obj, function (key, value) {
-        //   alert(key + ": " + value);
-        // });
-
+        // Loop payment history
         $.each(history, function (i, data) {
           console.log(i, data);
 
           // Prepare row html
           let row = "";
-          let desc = "Payment in ";
-          let d = new Date(data["created_at"]);
-          let date = d.getMonth().toString();
+          let month = new Date(data["month"]).toString("MMMM");
+          let date = new Date(data["created_at"]).toString(
+            "d MMMM yyyy - h:m tt"
+          );
           let amount = data["amount"];
 
           row =
             "<tr><td>" +
             (i + 1) +
-            "</td><td>" +
-            desc +
+            "</td><td>Payment in " +
+            month +
             "</td><td>" +
             date +
             "</td><td>" +
