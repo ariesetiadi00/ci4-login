@@ -141,20 +141,9 @@
                     <div class="row">
                         <div class="col">
                             <h6 class="text-center">Payment History</h6>
-                            <table class="table">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Description</th>
-                                    <th>Date Time</th>
-                                    <th>Amount</th>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Payment in June</td>
-                                    <td>29 June 2020</td>
-                                    <td>Rp. 400.000</td>
-                                </tr>
-                                <tr>
+                            <table class="table payment-history">
+
+                                <!-- <tr>
                                     <td>2</td>
                                     <td>Payment in July</td>
                                     <td>29 July 2020</td>
@@ -177,7 +166,7 @@
                                     <td>Payment in October</td>
                                     <td>29 October 2020</td>
                                     <td>Rp. 400.000</td>
-                                </tr>
+                                </tr> -->
                             </table>
                         </div>
                     </div>
