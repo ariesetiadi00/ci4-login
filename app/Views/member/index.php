@@ -68,8 +68,8 @@
 
 <!-- Member Insert and Update Modal-->
 <div class="modal fade" id="memberModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content ">
             <div class="modal-header">
                 <h5 class="modal-title" id="memberLabel">Add New Member</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -77,45 +77,108 @@
                 </button>
             </div>
             <div class="modal-body">
+
                 <!-- Start Form -->
                 <form action="/member/create" method="POST" class="user">
+
+                    <!-- ID place holder for javascript -->
                     <input type="hidden" id="id" name="id">
-                    <!-- Name -->
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="name" id="name" placeholder="Name" required autocomplete="off" ">
-                    </div>
-                    
-                    <!-- Address -->
-                    <div class=" form-group">
-                        <input type=" text" class="form-control" name="address" id="address" placeholder="Address" required autocomplete="off" ">
-                    </div>
-                    
-                    <!-- Place of birth -->
-                    <div class=" form-group">
-                        <input type=" text" class="form-control" name="birth_place" id="birth_place" placeholder="Place of birth" required autocomplete="off" ">
-                    </div>
 
-                    <!-- Date of birth -->
-                    <div class=" form-group">
-                        <input type="date" class="form-control" name="birth_date" id="birth_date" placeholder="Date of birth" required autocomplete="off" ">
-                    </div>
+                    <table class="table table-borderless">
+                        <!-- Image -->
+                        <tr>
+                            <td>Profile Image</td>
+                            <td>:</td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="image" id="image" placeholder="Image" required autocomplete="off">
+                                </div>
+                            </td>
+                        </tr>
 
-                    <!-- Religion -->
-                    <div class=" form-group">
-                        <select name="religion" id="religion" class="custom-select">
-                            <option value="" selected hidden>Your Religion</option>
-                            <option value="islam">Islam</option>
-                            <option value="hindu">Hindu</option>
-                            <option value="protestan">Protestan</option>
-                            <option value="katolik">Katolik</option>
-                            <option value="buddha">Buddha</option>
-                            <option value="khonghucu">Khonghucu</option>
-                        </select>
-                    </div>
+                        <!-- Name -->
+                        <tr>
+                            <td>Name</td>
+                            <td>:</td>
+                            <td>
+                                <div class=" form-group">
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="Name" required autocomplete="off">
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Address -->
+                        <tr>
+                            <td>Address</td>
+                            <td>:</td>
+                            <td>
+                                <div class=" form-group">
+                                    <input type=" text" class="form-control" name="address" id="address" placeholder="Address" required autocomplete="off">
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Birth Place -->
+                        <tr>
+                            <td>Place of Birth</td>
+                            <td>:</td>
+                            <td>
+                                <div class=" form-group">
+                                    <input type=" text" class="form-control" name="birth_place" id="birth_place" placeholder="Place of birth" required autocomplete="off">
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Birth Date -->
+                        <tr>
+                            <td>Date of Birth</td>
+                            <td>:</td>
+                            <td>
+                                <div class=" form-group">
+                                    <input type="text" class="form-control" name="birth_date" id="birth_date" placeholder="Date of birth" required autocomplete="off" onmouseover="(this.type = 'date')">
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Religion -->
+                        <tr>
+                            <td>Religion</td>
+                            <td>:</td>
+                            <td>
+                                <div class=" form-group">
+                                    <input type=" text" class="form-control" name="birth_place" id="birth_place" placeholder="Place of birth" required autocomplete="off">
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Phone -->
+                        <tr>
+                            <td>Phone Number</td>
+                            <td>:</td>
+                            <td>
+                                <div class=" form-group">
+                                    <input type=" text" class="form-control" name="phone" id="phone" placeholder="Phone number" required autocomplete="off">
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Gender -->
+                        <tr>
+                            <td>Gender</td>
+                            <td>:</td>
+                            <td>
+                                <div class=" form-group d-flex justify-content-start">
+                                    <div class="form-check d-inline-block">
+                                        <input class="form-check-input" type="radio" name="gender" id="gender1" value="male" checked>
+                                        <label class="form-check-label" for="gender1">
+                                            Male
+                                        </label>
+                                    </div>
+                                    <div class="form-check d-inline-block mx-4">
+                                        <input class="form-check-input" type="radio" name="gender" id="gender2" value="female">
+                                        <label class="form-check-label" for="gender2">
+                                            Female
+                                        </label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
 
-                    <!-- Phone Number -->
-
-                    <!-- Gender -->
 
                     <div class=" modal-footer">
                         <button id="memberButton" type="submit" class="btn btn-primary btn-block">
