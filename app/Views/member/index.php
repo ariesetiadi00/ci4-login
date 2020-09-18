@@ -80,9 +80,43 @@
                 <!-- Start Form -->
                 <form action="/member/create" method="POST" class="user">
                     <input type="hidden" id="id" name="id">
+                    <!-- Name -->
                     <div class="form-group">
                         <input type="text" class="form-control" name="name" id="name" placeholder="Name" required autocomplete="off" ">
                     </div>
+                    
+                    <!-- Address -->
+                    <div class=" form-group">
+                        <input type=" text" class="form-control" name="address" id="address" placeholder="Address" required autocomplete="off" ">
+                    </div>
+                    
+                    <!-- Place of birth -->
+                    <div class=" form-group">
+                        <input type=" text" class="form-control" name="birth_place" id="birth_place" placeholder="Place of birth" required autocomplete="off" ">
+                    </div>
+
+                    <!-- Date of birth -->
+                    <div class=" form-group">
+                        <input type="date" class="form-control" name="birth_date" id="birth_date" placeholder="Date of birth" required autocomplete="off" ">
+                    </div>
+
+                    <!-- Religion -->
+                    <div class=" form-group">
+                        <select name="religion" id="religion" class="custom-select">
+                            <option value="" selected hidden>Your Religion</option>
+                            <option value="islam">Islam</option>
+                            <option value="hindu">Hindu</option>
+                            <option value="protestan">Protestan</option>
+                            <option value="katolik">Katolik</option>
+                            <option value="buddha">Buddha</option>
+                            <option value="khonghucu">Khonghucu</option>
+                        </select>
+                    </div>
+
+                    <!-- Phone Number -->
+
+                    <!-- Gender -->
+
                     <div class=" modal-footer">
                         <button id="memberButton" type="submit" class="btn btn-primary btn-block">
                             Submit
