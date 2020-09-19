@@ -28,10 +28,8 @@ $(function () {
           $(".confirm-button").attr("disabled", false).html("Confirm Payment");
         }
 
-        // Loop payment history
+        // Loop payment histroy
         $.each(history, function (i, data) {
-          console.log(i, data);
-
           // Prepare row html
           let row = "";
           let month = new Date(data["month"]).toString("MMMM");

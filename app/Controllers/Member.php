@@ -22,11 +22,8 @@ class Member extends BaseController
     {
 
         $id = session()->get('data')['user_id'];
-
         $user = $this->userModel->find($id);
-
         $member = $this->memberModel->findAll();
-
 
         $data = [
             'title' => 'Member',
@@ -39,13 +36,21 @@ class Member extends BaseController
     }
     public function create()
     {
-        $name = $this->request->getVar('name');
+        // Variable Initial
+        $data = [
+            'name' => $this->request->getVar('name'),
+            'address' => $this->request->getVar('address'),
+            'birth_place' => $this->request->getVar('birth_place'),
+            'birth_date' => $this->request->getVar('birth_date'),
+            'religion' => $this->request->getVar('religion'),
+            'phone' => $this->request->getVar('phone'),
+            'gender' => $this->request->getVar('gender'),
+            'image' => $this->request->getVar('image'),
+            'created_at' => $this->time->now(),
+            'updated_at' => $this->time->now()
+        ];
 
-        $this->memberModel->save([
-            'name' => $name,
-            'created_at' => $this->time::now(),
-            'updated_at' => $this->time::now()
-        ]);
+        $this->memberModel->save($data);
 
         session()->setFlashData('strong', 'Insert');
         session()->setFlashData('message', 'Success');
@@ -92,10 +97,10 @@ class Member extends BaseController
         $query_1 = "SELECT * FROM member WHERE id = $id";
 
         // Select member that have paid on this month
-        $query_2 = "SELECT * FROM member 
-                    INNER JOIN member_payment 
-                    ON member.id = member_payment.member_id 
-                    WHERE member.id = $id 
+        $query_2 = "SELECT * FROM member
+                    INNER JOIN member_payment
+                    ON member.id = member_payment.member_id
+                    WHERE member.id = $id
                     AND member_payment.month = $time";
 
         // Select all this member  payment history

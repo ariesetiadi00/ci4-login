@@ -34,10 +34,10 @@
 
         // Select this member on today's month.
         // If 1 => Paid // If 0 => Not Paid
-        $query = "SELECT * FROM member 
-                INNER JOIN member_payment 
-                ON member.id = member_payment.member_id 
-                WHERE member.id = $id 
+        $query = "SELECT * FROM member
+                INNER JOIN member_payment
+                ON member.id = member_payment.member_id
+                WHERE member.id = $id
                 AND member_payment.month = $time";
         $data = $db->query($query)->getResultArray();
         ?>
@@ -102,7 +102,7 @@
                             <td>:</td>
                             <td>
                                 <div class=" form-group">
-                                    <input type="text" class="form-control" name="name" id="name" placeholder="Name" required autocomplete="off">
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="Insert Member Name" required autocomplete="off">
                                 </div>
                             </td>
                         </tr>
@@ -142,7 +142,15 @@
                             <td>:</td>
                             <td>
                                 <div class=" form-group">
-                                    <input type=" text" class="form-control" name="birth_place" id="birth_place" placeholder="Place of birth" required autocomplete="off">
+                                    <select class="custom-select" name="religion" id="religion">
+                                        <option hidden selected>Member Religion</option>
+                                        <option value="islam">Islam</option>
+                                        <option value="hindu">Hindu</option>
+                                        <option value="protestan">Protestan</option>
+                                        <option value="katolik">Katolik</option>
+                                        <option value="buddha">Buddha</option>
+                                        <option value="khonghucu">Khonghucu</option>
+                                    </select>
                                 </div>
                             </td>
                         </tr>
@@ -163,13 +171,13 @@
                             <td>
                                 <div class=" form-group d-flex justify-content-start">
                                     <div class="form-check d-inline-block">
-                                        <input class="form-check-input" type="radio" name="gender" id="gender1" value="male" checked>
+                                        <input class="form-check-input" type="radio" name="gender" id="gender1" value="m" checked>
                                         <label class="form-check-label" for="gender1">
                                             Male
                                         </label>
                                     </div>
                                     <div class="form-check d-inline-block mx-4">
-                                        <input class="form-check-input" type="radio" name="gender" id="gender2" value="female">
+                                        <input class="form-check-input" type="radio" name="gender" id="gender2" value="f">
                                         <label class="form-check-label" for="gender2">
                                             Female
                                         </label>

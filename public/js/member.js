@@ -1,3 +1,5 @@
+// CREATE AND UPDATE FORM
+
 $(function () {
   // Prepare DOM
   const memberLabel = document.getElementById("memberLabel");
@@ -29,6 +31,7 @@ $(function () {
       method: "post",
       dataType: "JSON",
       success: function (member) {
+        // console.log(member);
         $("#id").val(member[0].id);
         $("input#name").val(member[0].name);
       },
