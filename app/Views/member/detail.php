@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row text-center">
             <div class="col mb-3">
-                <h2 class="member-name">Arie Setiadi</h2>
+                <h2 class="member-name"><?= $member['name'] ?></h2>
             </div>
         </div>
         <div class="row">
@@ -19,43 +19,43 @@
                     <tr>
                         <td>Address</td>
                         <td>:</td>
-                        <td class="member-address"></td>
+                        <td class="member-address"><?= $member['address'] ?></td>
                     </tr>
                     <!-- Place of Birth -->
                     <tr>
                         <td>Place of Birth</td>
                         <td>:</td>
-                        <td class="member-place"></td>
+                        <td class="member-place"><?= $member['birth_place'] ?></td>
                     </tr>
                     <!-- Date of Birth -->
                     <tr>
                         <td>Date of Birth</td>
                         <td>:</td>
-                        <td class="member-date"></td>
+                        <td class="member-date"><?= date("j F Y", strtotime($member['birth_date'])) ?></td>
                     </tr>
                     <!-- Religion -->
                     <tr>
                         <td>Religion</td>
                         <td>:</td>
-                        <td class="member-religion"></td>
+                        <td class="member-religion"><?= $member['religion'] ?></td>
                     </tr>
                     <!-- Gender -->
                     <tr>
                         <td>Gender</td>
                         <td>:</td>
-                        <td class="member-gender"></td>
+                        <td class="member-gender"><?= ($member['gender'] == "m") ? 'Male' : 'Female' ?></td>
                     </tr>
                     <!-- Phone Number -->
                     <tr>
                         <td>Phone Number</td>
                         <td>:</td>
-                        <td class="member-phone"></td>
+                        <td class="member-phone"><?= $member['phone'] ?></td>
                     </tr>
                     <!-- Joined on -->
                     <tr>
                         <td>Joined on</td>
                         <td>:</td>
-                        <td class="member-join"></td>
+                        <td class="member-join"><?= date("j F Y - g:i a", strtotime($member['created_at'])) ?></td>
                     </tr>
                 </table>
             </div>
@@ -63,12 +63,18 @@
         <hr>
         <div class="row">
             <div class="col">
-                <form class="pay" action="/payment/" method="post">
+                <form action="/payment/" method="post">
                     <input class="id" type="hidden" name="id">
 
-                    <button class="confirm-button btn btn-block btn-success" type="submit" id="pay" name="pay" onclick='return confirm("Confirm payment from this member ?")'>
-                        Confirm Payment
-                    </button>
+                    <?php if ($status > 0) : ?>
+                        <button class="confirm-button btn btn-block btn-success" type="submit" id="pay" disabled name="pay">
+                            Already Paid
+                        </button>
+                    <?php else : ?>
+                        <button class="confirm-button btn btn-block btn-success" type="submit" id="pay" name="pay" onclick='return confirm("Confirm payment from this member ?")'>
+                            Confirm Payment
+                        </button>
+                    <?php endif; ?>
 
                 </form>
             </div>
@@ -78,6 +84,22 @@
             <div class="col">
                 <h6 class="text-center">Payment History</h6>
                 <table class="table payment-history">
+                    <tr>
+                        <th>#</th>
+                        <th>Desc</th>
+                        <th>Paid at</th>
+                        <th>Amount</th>
+                    </tr>
+                    <!-- Looping Payment History -->
+                    <?php $i = 1 ?>
+                    <?php foreach ($history as $h) : ?>
+                        <tr>
+                            <td><?= $i++ ?></td>
+                            <td>Payment in <?= date('F', mktime(0, 0, 0, $h['month'])) ?></td>
+                            <td><?= date("j F Y - g:i a", strtotime($h['created_at'])) ?></td>
+                            <td>Rp. <?= number_format($h['amount'], 2)  ?></td>
+                        </tr>
+                    <?php endforeach; ?>
                 </table>
             </div>
         </div>

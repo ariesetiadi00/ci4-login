@@ -138,22 +138,27 @@ class Member extends BaseController
     public function detail($id)
     {
         // Get Member detail
-        $member = $this->memberModel->find($id);
+        // $member = $this->memberModel->find($id);
+        $member = $this->get($id);
+        // dd($member);
 
-        /// Variable Initial
+        /// Variable Initial    
         $data = [
             'title' => 'Edit Member',
             'user' => $this->user,
             'time' => $this->time->getMonth(),
-            'member' => $member
+            'member' => $member[0][0],
+            'status' => $member[1][0],
+            'history' => $member[2]
         ];
+        // dd($data);
         // If empty, redirect to create page.
         return view('member/detail', $data);
     }
 
-    public function get()
+    public function get($id)
     {
-        $id = $_POST['id'];
+        // $id = $_POST['id'];
         $time = $this->time->getMonth();
 
         // Select one member detail
@@ -174,6 +179,8 @@ class Member extends BaseController
         $status = $this->db->query($query_2)->getResultArray();
         $history = $this->db->query($query_3)->getResultArray();
 
-        echo json_encode(array('member' => $member, 'status' => $status, 'history' => $history));
+        $data = [$member, $status, $history];
+        // echo json_encode(array('member' => $member, 'status' => $status, 'history' => $history));
+        return $data;
     }
 }
