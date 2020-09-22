@@ -11,33 +11,51 @@ class Member extends BaseController
     protected $memberModel;
     protected $userModel;
     protected $time;
+    protected $user;
 
     public function __construct()
     {
         $this->memberModel = new MemberModel();
         $this->userModel = new UserModel();
         $this->time = new Time();
+
+        // Get User Account
+        $id = session()->get('data')['user_id'];
+        $this->user = $this->userModel->find($id);
     }
+
     public function index()
     {
 
-        $id = session()->get('data')['user_id'];
-        $user = $this->userModel->find($id);
         // $member = $this->memberModel->findAll();
         $member = $this->memberModel->getAll();
 
         $data = [
             'title' => 'Member',
             'member' => $member,
-            'user' => $user,
+            'user' => $this->user,
             'time' => $this->time->getMonth(),
             'db' => $this->db
         ];
         return view('member/index', $data);
     }
+
     public function create()
     {
         // Variable Initial
+        $data = [
+            'title' => 'New Member',
+            'user' => $this->user,
+            'time' => $this->time->getMonth(),
+            'db' => $this->db
+        ];
+        // If empty, redirect to create page.
+        return view('member/create', $data);
+    }
+
+    public function insert()
+    {
+        // dd($this->request->getVar());
         $data = [
             'name' => $this->request->getVar('name'),
             'address' => $this->request->getVar('address'),
@@ -59,19 +77,47 @@ class Member extends BaseController
         return redirect()->to('/member/index');
     }
 
-    public function edit()
+    public function edit($id)
+    {
+        // Get Member detail
+        $member = $this->memberModel->find($id);
+        // Get religion and gender to looping the form
+        $religion = $this->db->query("SELECT * FROM member_religion");
+        $gender = $this->db->query("SELECT * FROM member_gender");
+
+        /// Variable Initial
+        $data = [
+            'title' => 'Edit Member',
+            'user' => $this->user,
+            'time' => $this->time->getMonth(),
+            'db' => $this->db,
+            'member' => $member,
+            'religion' => $religion,
+            'gender' => $gender
+        ];
+        // If empty, redirect to create page.
+        return view('member/edit', $data);
+    }
+
+    public function update()
     {
         // Prepare array data
         $data = [
             'id' => $this->request->getVar('id'),
-            'name' => $this->request->getVar('name')
+            'name' => $this->request->getVar('name'),
+            'address' => $this->request->getVar('address'),
+            'birth_place' => $this->request->getVar('birth_place'),
+            'birth_date' => $this->request->getVar('birth_date'),
+            'religion' => $this->request->getVar('religion'),
+            'phone' => $this->request->getVar('phone'),
+            'gender' => $this->request->getVar('gender'),
+            'image' => $this->request->getVar('image'),
+            'updated_at' => $this->time->now()
         ];
 
-        // Update
         $this->memberModel->save($data);
 
-        // Redirect
-        session()->setFlashData('strong', 'Edit');
+        session()->setFlashData('strong', 'Update');
         session()->setFlashData('message', 'Success');
 
         return redirect()->to('/member/index');

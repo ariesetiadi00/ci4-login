@@ -19,6 +19,10 @@
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
 
+    <!-- Reset From Script -->
+    <script src="/js/form-reset.js"></script>
+
+
 
 </head>
 
@@ -231,8 +235,8 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/js/sb-admin-2.min.js"></script>
-    <script src="/js/member.js"></script>
-    <script src="/js/member-detail.js"></script>
+    <!-- <script src="/js/member.js"></script>
+    <script src="/js/member-detail.js"></script> -->
 
 
 
