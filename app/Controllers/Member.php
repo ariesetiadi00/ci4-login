@@ -23,7 +23,8 @@ class Member extends BaseController
 
         $id = session()->get('data')['user_id'];
         $user = $this->userModel->find($id);
-        $member = $this->memberModel->findAll();
+        // $member = $this->memberModel->findAll();
+        $member = $this->memberModel->getAll();
 
         $data = [
             'title' => 'Member',

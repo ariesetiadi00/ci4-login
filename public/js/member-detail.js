@@ -1,3 +1,5 @@
+// MEMBER DETAIL
+
 $(function () {
   // If detail clicked, get member detail using ajax
   $(".detail-button").on("click", function () {
@@ -14,10 +16,32 @@ $(function () {
         const member = data["member"][0];
         const status = data["status"][0];
         const history = data["history"];
-        let html =
-          "<tr><th>#</th><th>Description</th><th>Date Time</th><th>Amount</th></tr>";
 
-        $(".member-name").html(member.name);
+        // Convert Date before use
+        member.birth_date = new Date(member.birth_date).toString("d MMMM yyyy");
+        member.created_at = new Date(member.created_at).toString(
+          "dd MMMM yyyy"
+        );
+        // Gender String
+        if (member.gender == "m") {
+          member.gender = "Male";
+        } else if (member.gender == "f") {
+          member.gender = "Female";
+        }
+
+        // Set Member Detail
+        $(".member-name").html(member.name); // Name
+        $(".member-image").attr("src", "/img/profile/" + member.image); // Image
+        $(".member-address").html(member.address); // Address
+        $(".member-place").html(member.birth_place); // Birth Place
+        $(".member-date").html(member.birth_date); // Birth Date
+        $(".member-religion").html(member.religion); // Religion
+        $(".member-gender").html(member.gender); // Gender
+        $(".member-phone").html(member.phone); // Phone
+        $(".member-join").html(member.created_at);
+
+        console.log(member);
+        // End Detail
 
         // Send ID Member
         $("input.id").val(member.id);
@@ -27,6 +51,10 @@ $(function () {
         } else {
           $(".confirm-button").attr("disabled", false).html("Confirm Payment");
         }
+
+        // Prepare Table Header
+        let html =
+          "<tr><th>#</th><th>Description</th><th>Date Time</th><th>Amount</th></tr>";
 
         // Loop payment histroy
         $.each(history, function (i, data) {

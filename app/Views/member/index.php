@@ -79,6 +79,7 @@
             <div class="modal-body">
 
                 <!-- Start Form -->
+                <!-- INSERT and UPDATE Form -->
                 <form action="/member/create" method="POST" class="user">
 
                     <!-- ID place holder for javascript -->
@@ -132,7 +133,7 @@
                             <td>:</td>
                             <td>
                                 <div class=" form-group">
-                                    <input type="text" class="form-control" name="birth_date" id="birth_date" placeholder="Date of birth" required autocomplete="off" onmouseover="(this.type = 'date')">
+                                    <input type="date" class="form-control" name="birth_date" id="birth_date" placeholder="Date of birth" required autocomplete="off">
                                 </div>
                             </td>
                         </tr>
@@ -144,12 +145,12 @@
                                 <div class=" form-group">
                                     <select class="custom-select" name="religion" id="religion">
                                         <option hidden selected>Member Religion</option>
-                                        <option value="islam">Islam</option>
-                                        <option value="hindu">Hindu</option>
-                                        <option value="protestan">Protestan</option>
-                                        <option value="katolik">Katolik</option>
-                                        <option value="buddha">Buddha</option>
-                                        <option value="khonghucu">Khonghucu</option>
+                                        <option id="Islam" value="Islam">Islam</option>
+                                        <option id="Hindu" value="Hindu">Hindu</option>
+                                        <option id="Protestan" value="Protestan">Protestan</option>
+                                        <option id="Katolik" value="Katolik">Katolik</option>
+                                        <option id="Buddha" value="Buddha">Buddha</option>
+                                        <option id="Khonghucu" value="Khonghucu">Khonghucu</option>
                                     </select>
                                 </div>
                             </td>
@@ -222,11 +223,51 @@
                             <img class="member-image w-75 rounded-circle c-shadow" src="/img/profile/d-male.png" alt="Profile">
                         </div>
                         <div class="member-desc col-lg-8 text-center p-2 align-self-center">
-                            <h5>Member Detail</h5>
-                            <h5>Member Detail</h5>
-                            <h5>Member Detail</h5>
-                            <h5>Member Detail</h5>
-                            <h5>Member Detail</h5>
+                            <!-- Member detail box -->
+                            <table class="table">
+                                <!-- Address Line -->
+                                <tr>
+                                    <td>Address</td>
+                                    <td>:</td>
+                                    <td class="member-address"></td>
+                                </tr>
+                                <!-- Place of Birth -->
+                                <tr>
+                                    <td>Place of Birth</td>
+                                    <td>:</td>
+                                    <td class="member-place"></td>
+                                </tr>
+                                <!-- Date of Birth -->
+                                <tr>
+                                    <td>Date of Birth</td>
+                                    <td>:</td>
+                                    <td class="member-date"></td>
+                                </tr>
+                                <!-- Religion -->
+                                <tr>
+                                    <td>Religion</td>
+                                    <td>:</td>
+                                    <td class="member-religion"></td>
+                                </tr>
+                                <!-- Gender -->
+                                <tr>
+                                    <td>Gender</td>
+                                    <td>:</td>
+                                    <td class="member-gender"></td>
+                                </tr>
+                                <!-- Phone Number -->
+                                <tr>
+                                    <td>Phone Number</td>
+                                    <td>:</td>
+                                    <td class="member-phone"></td>
+                                </tr>
+                                <!-- Joined on -->
+                                <tr>
+                                    <td>Joined on</td>
+                                    <td>:</td>
+                                    <td class="member-join"></td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                     <hr>
