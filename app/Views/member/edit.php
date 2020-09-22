@@ -11,10 +11,10 @@
 
         <!-- Start Form -->
         <!-- INSERT and UPDATE Form -->
-        <form id="member-form" action="/member/edit" method="POST" class="user">
+        <form id="member-form" action="/member/update" method="POST" class="user">
 
             <!-- ID place holder for javascript -->
-            <input type="hidden" id="id" name="id">
+            <input type="hidden" id="id" name="id" value="<?= $member['id'] ?>">
 
             <table class="table table-borderless">
                 <!-- Image -->
@@ -74,14 +74,17 @@
                     <td>:</td>
                     <td>
                         <div class=" form-group">
-                            <select class="custom-select" name="religion" id="religion" onreset="(this.value = '')">
-                                <option id="option-default" hidden selected>Member Religion</option>
-                                <option id="Islam" value="Islam">Islam</option>
-                                <option id="Hindu" value="Hindu">Hindu</option>
-                                <option id="Protestan" value="Protestan">Protestan</option>
-                                <option id="Katolik" value="Katolik">Katolik</option>
-                                <option id="Buddha" value="Buddha">Buddha</option>
-                                <option id="Khonghucu" value="Khonghucu">Khonghucu</option>
+                            <select class="custom-select" name="religion" id="religion">
+                                <option id=" option-default" hidden selected>Member Religion</option>
+                                <!-- Loop religion list -->
+                                <?php foreach ($religion as $r) : ?>
+                                    <!-- If match, selected -->
+                                    <?php if ($member['religion'] == $r['religion']) :  ?>
+                                        <option selected><?= $r['religion'] ?></option>
+                                    <?php else : ?>
+                                        <option><?= $r['religion'] ?></option>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </td>
@@ -102,18 +105,32 @@
                     <td>:</td>
                     <td>
                         <div class=" form-group d-flex justify-content-start">
-                            <div class="form-check d-inline-block">
-                                <input class="form-check-input" type="radio" name="gender" id="gender1" value="m" checked>
-                                <label class="form-check-label" for="gender1">
-                                    Male
-                                </label>
-                            </div>
-                            <div class="form-check d-inline-block mx-4">
-                                <input class="form-check-input" type="radio" name="gender" id="gender2" value="f">
-                                <label class="form-check-label" for="gender2">
-                                    Female
-                                </label>
-                            </div>
+                            <!-- Looping  Gender -->
+                            <?php foreach ($gender as $g) : ?>
+                                <?php if ($member['gender'] == $g['value']) : ?>
+
+                                    <div class="mx-4">
+                                        <input class="form-check-input" type="radio" name="gender" id="<?= $g['gender'] ?>" value="<?= $g['value'] ?>" checked>
+
+                                        <label class="form-check-label" for="<?= $g['gender'] ?>">
+                                            <?= $g['gender'] ?>
+                                        </label>
+                                    </div>
+
+                                <?php else : ?>
+
+                                    <div class="mx-4">
+                                        <input class="form-check-input" type="radio" name="gender" id="<?= $g['gender'] ?>" value="<?= $g['value'] ?>">
+
+                                        <label class="form-check-label" for="<?= $g['gender'] ?>">
+                                            <?= $g['gender'] ?>
+                                        </label>
+                                    </div>
+
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+
+
                         </div>
                     </td>
                 </tr>

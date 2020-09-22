@@ -57,7 +57,7 @@
                 </div>
             </td>
             <td class="middle-div">
-                <a href="/member/get" class="detail-button btn btn-sm" data-toggle="modal" data-target="#detailMemberModal" data-id="<?= $m['id'] ?>">Detail</a>
+                <a href="/member/detail/<?= $m['id'] ?>" class="detail-button btn btn-sm" data-id="<?= $m['id'] ?>">Detail</a>
 
                 <a href="/member/edit/<?= $m['id'] ?>" class="edit-button btn btn-sm">Edit</a>
 

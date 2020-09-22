@@ -82,8 +82,8 @@ class Member extends BaseController
         // Get Member detail
         $member = $this->memberModel->find($id);
         // Get religion and gender to looping the form
-        $religion = $this->db->query("SELECT * FROM member_religion");
-        $gender = $this->db->query("SELECT * FROM member_gender");
+        $religion = $this->db->query("SELECT * FROM member_religion")->getResultArray();
+        $gender = $this->db->query("SELECT * FROM member_gender")->getResultArray();
 
         /// Variable Initial
         $data = [
@@ -133,6 +133,22 @@ class Member extends BaseController
         session()->setFlashData('message', 'Success');
 
         return redirect()->to('/member/index');
+    }
+
+    public function detail($id)
+    {
+        // Get Member detail
+        $member = $this->memberModel->find($id);
+
+        /// Variable Initial
+        $data = [
+            'title' => 'Edit Member',
+            'user' => $this->user,
+            'time' => $this->time->getMonth(),
+            'member' => $member
+        ];
+        // If empty, redirect to create page.
+        return view('member/detail', $data);
     }
 
     public function get()
