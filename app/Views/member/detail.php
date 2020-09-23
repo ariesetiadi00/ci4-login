@@ -5,57 +5,60 @@
     <div class="container">
         <div class="row text-center">
             <div class="col mb-3">
-                <h2 class="member-name"><?= $member['name'] ?></h2>
+                <a class="d-flex justify-content-start" href="/member/">
+                    <i class="fas fa-chevron-left fa-2x"></i>
+                </a>
+                <h2 class="d-inline-block justify-content-center"><?= $member['name'] ?></h2>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-4 text-center p-2">
-                <img class="member-image w-75 rounded-circle c-shadow" src="/img/profile/d-male.png" alt="Profile">
+                <img class="w-75 rounded-circle c-shadow" src="/img/profile/<?= $member['image'] ?>" alt="Profile">
             </div>
-            <div class="member-desc col-lg-8 text-center p-2 align-self-center">
+            <div class="col-lg-8 text-center p-2 align-self-center">
                 <!-- Member detail box -->
                 <table class="table">
                     <!-- Address Line -->
                     <tr>
                         <td>Address</td>
                         <td>:</td>
-                        <td class="member-address"><?= $member['address'] ?></td>
+                        <td><?= $member['address'] ?></td>
                     </tr>
                     <!-- Place of Birth -->
                     <tr>
                         <td>Place of Birth</td>
                         <td>:</td>
-                        <td class="member-place"><?= $member['birth_place'] ?></td>
+                        <td><?= $member['birth_place'] ?></td>
                     </tr>
                     <!-- Date of Birth -->
                     <tr>
                         <td>Date of Birth</td>
                         <td>:</td>
-                        <td class="member-date"><?= date("j F Y", strtotime($member['birth_date'])) ?></td>
+                        <td><?= date("j F Y", strtotime($member['birth_date'])) ?></td>
                     </tr>
                     <!-- Religion -->
                     <tr>
                         <td>Religion</td>
                         <td>:</td>
-                        <td class="member-religion"><?= $member['religion'] ?></td>
+                        <td><?= $member['religion'] ?></td>
                     </tr>
                     <!-- Gender -->
                     <tr>
                         <td>Gender</td>
                         <td>:</td>
-                        <td class="member-gender"><?= ($member['gender'] == "m") ? 'Male' : 'Female' ?></td>
+                        <td><?= ($member['gender'] == "m") ? 'Male' : 'Female' ?></td>
                     </tr>
                     <!-- Phone Number -->
                     <tr>
                         <td>Phone Number</td>
                         <td>:</td>
-                        <td class="member-phone"><?= $member['phone'] ?></td>
+                        <td><?= $member['phone'] ?></td>
                     </tr>
                     <!-- Joined on -->
                     <tr>
                         <td>Joined on</td>
                         <td>:</td>
-                        <td class="member-join"><?= date("j F Y - g:i a", strtotime($member['created_at'])) ?></td>
+                        <td><?= date("j F Y - g:i a", strtotime($member['created_at'])) ?></td>
                     </tr>
                 </table>
             </div>

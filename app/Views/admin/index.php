@@ -25,16 +25,18 @@
     </tr>
     <tr>
         <td>
-            <h2>400.000</h2>
+            <button type="button" class="btn" data-toggle="modal" data-target="#priceModal">
+                <h2><?= number_format($price[0]['price'], 0) ?></h2>
+            </button>
         </td>
         <td>
-            <h2>15</h2>
+            <h2><?= count($member[0]) ?></h2>
         </td>
         <td>
-            <h2>6</h2>
+            <h2><?= count($member[1]) ?></h2>
         </td>
         <td>
-            <h2>9</h2>
+            <h2><?= count($member[2]) ?></h2>
         </td>
     </tr>
     <tr>
@@ -45,7 +47,7 @@
     </tr>
 </table>
 
-<div class="text-center mb-3">
+<div class=" text-center mb-3">
     <i class="fas fa-list-alt"></i>
     Payment History
 </div>
@@ -64,10 +66,36 @@
             <td><?= $i++ ?></td>
             <td><?= $p['name'] ?></td>
             <td>Payment in <?= date('F', mktime(0, 0, 0, $p['month'])) ?></td>
-            <td><?= date("j F Y - H:i", strtotime($p['created_at'])) ?></td>
+            <td><?= date("j F Y - g:i a", strtotime($p['created_at'])) ?></td>
             <td>Rp. <?= number_format($p['amount'], 2) ?>
             <td>
         </tr>
     <?php endforeach; ?>
 </table>
+
+
+
+<!-- ==================================================================================================
+================================================================================================== -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="priceModal" tabindex="-1" role="dialog" aria-labelledby="priceModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="priceModalLabel">Change Price</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-block">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 <?= $this->endSection(); ?>

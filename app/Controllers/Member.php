@@ -141,6 +141,7 @@ class Member extends BaseController
         // $member = $this->memberModel->find($id);
         $member = $this->get($id);
         // dd($member);
+        // dd($member);
 
         /// Variable Initial    
         $data = [
@@ -148,7 +149,7 @@ class Member extends BaseController
             'user' => $this->user,
             'time' => $this->time->getMonth(),
             'member' => $member[0][0],
-            'status' => $member[1][0],
+            'status' => $member[1],
             'history' => $member[2]
         ];
         // dd($data);
@@ -176,7 +177,7 @@ class Member extends BaseController
                     WHERE member_payment.member_id = $id";
 
         $member = $this->db->query($query_1)->getResultArray();
-        $status = $this->db->query($query_2)->getResultArray();
+        $status = $this->db->query($query_2)->getRowArray();
         $history = $this->db->query($query_3)->getResultArray();
 
         $data = [$member, $status, $history];
