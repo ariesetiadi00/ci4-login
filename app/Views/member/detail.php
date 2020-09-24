@@ -67,7 +67,7 @@
         <div class="row">
             <div class="col">
                 <form action="/payment/" method="post">
-                    <input class="id" type="hidden" name="id">
+                    <input class="id" value="<?= $member['id'] ?>" type="hidden" name="id">
 
                     <?php if ($status > 0) : ?>
                         <button class="confirm-button btn btn-block btn-success" type="submit" id="pay" disabled name="pay">

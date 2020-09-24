@@ -152,7 +152,6 @@ class Member extends BaseController
             'status' => $member[1],
             'history' => $member[2]
         ];
-        // dd($data);
         // If empty, redirect to create page.
         return view('member/detail', $data);
     }

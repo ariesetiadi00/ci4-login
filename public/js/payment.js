@@ -1,4 +1,10 @@
-// // MEMBER DETAIL
+// // MEMBER PAYMENT
+
+$(() => {
+  $("a.detail-button").on("click", () => {
+    console.log($(this).data("id"));
+  });
+});
 
 // $(function () {
 //   // If detail clicked, get member detail using ajax

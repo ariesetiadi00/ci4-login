@@ -231,6 +231,7 @@
     <!-- Custom scripts for all pages-->
     <script src="/js/sb-admin-2.min.js"></script>
     <script src="/js/dashboard.js"></script>
+    <script src="/js/payment.js"></script>
     <!-- <script src="/js/member-detail.js"></script> -->
 
 
