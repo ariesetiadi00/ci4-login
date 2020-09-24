@@ -34,7 +34,7 @@ class Payment extends BaseController
         session()->setFlashData('strong', 'Payment');
         session()->setFlashData('message', 'Success');
 
-        return redirect()->to('/member');
+        return redirect()->to('/member/detail/' . $data['member_id']);
     }
 
     public function price()

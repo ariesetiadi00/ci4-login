@@ -61,10 +61,49 @@
 
                 <a href="/member/edit/<?= $m['id'] ?>" class="edit-button btn btn-sm">Edit</a>
 
-                <a href="/member/delete/<?= $m['id'] ?>" class="deleteButton btn btn-sm btn-danger" onclick="return confirm('Delete Member')">Delete</a>
+                <a id="delete-button" href="/member/delete/<?= $m['id'] ?>" class="delete-button btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal" data-mid="<?= $m['id'] ?>">Delete</a>
             </td>
         </tr>
     <?php endforeach; ?>
 </table>
+
+<!-- =================================================================== -->
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Member</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <form id="delete-form" action="/member/delete" method="POST">
+
+                                <!-- Hidden input for id -->
+                                <input id="delete-id" name="delete-id" type="hidden">
+
+                                <!-- Delete Payment Checkbox -->
+                                <div class="custom-control custom-checkbox">
+                                    <input name="delete-check" type="checkbox" class="custom-control-input" id="delete-check">
+                                    <label class="custom-control-label" for="delete-check">Delete member payment history</label>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">OK</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?= $this->endSection(); ?>

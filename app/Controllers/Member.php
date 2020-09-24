@@ -37,6 +37,9 @@ class Member extends BaseController
             'time' => $this->time->getMonth(),
             'db' => $this->db
         ];
+
+        // dd($data);
+
         return view('member/index', $data);
     }
 
@@ -123,10 +126,20 @@ class Member extends BaseController
         return redirect()->to('/member/index');
     }
 
-    public function delete($id)
+    public function delete()
     {
+        // Get POST Data
+        $id = (int)$this->request->getVar('delete-id');
+
+        // If ON, delete history
+        if ($this->request->getVar('delete-check') == 'on') {
+            // Delete history
+            $this->db->table('member_payment')->delete(['member_id' => $id]);
+        }
+
         // Delete
-        $this->memberModel->delete($id);
+        // $this->memberModel->delete($id);
+        $this->db->table('member')->delete(['id' => $id]);
 
         // Redirect
         session()->setFlashData('strong', 'Delete');
@@ -137,11 +150,7 @@ class Member extends BaseController
 
     public function detail($id)
     {
-        // Get Member detail
-        // $member = $this->memberModel->find($id);
         $member = $this->get($id);
-        // dd($member);
-        // dd($member);
 
         /// Variable Initial    
         $data = [

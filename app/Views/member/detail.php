@@ -2,6 +2,18 @@
 <?= $this->section('content'); ?>
 
 <div class="modal-body">
+
+    <!-- Message -->
+    <?php if (session()->getFlashData('strong') != null) : ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong><?= session()->getFlashData('strong') ?></strong> <?= session()->getFlashData('message') ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php endif; ?>
+    <!-- End Message -->
+
     <div class="container">
         <div class="row text-center">
             <div class="col mb-3">

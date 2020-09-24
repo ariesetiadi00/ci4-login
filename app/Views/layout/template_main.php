@@ -222,9 +222,6 @@
     <!-- Core plugin JavaScript-->
     <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- j Query CDN -->
-    <!-- <script src="<script src=" https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>"></script> -->
-
     <!-- Date JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js" integrity="sha512-/n/dTQBO8lHzqqgAQvy0ukBQ0qLmGzxKhn8xKrz4cn7XJkZzy+fAtzjnOQd5w55h4k1kUC+8oIe6WmrGUYwODA==" crossorigin="anonymous"></script>
 
@@ -232,7 +229,7 @@
     <script src="/js/sb-admin-2.min.js"></script>
     <script src="/js/dashboard.js"></script>
     <script src="/js/payment.js"></script>
-    <!-- <script src="/js/member-detail.js"></script> -->
+    <script src="/js/delete.js"></script>
 
 
 
