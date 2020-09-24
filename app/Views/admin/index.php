@@ -25,7 +25,7 @@
     </tr>
     <tr>
         <td>
-            <button type="button" class="btn" data-toggle="modal" data-target="#priceModal">
+            <button id="price-button" type="button" data-price="<?= $price[0]['price'] ?>" data-id="<?= $price[0]['id'] ?>" class="btn" data-toggle="modal" data-target="#priceModal">
                 <h2><?= number_format($price[0]['price'], 0) ?></h2>
             </button>
         </td>
@@ -89,11 +89,37 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                ...
+            <div class="price-modal-body">
+                <!-- Start Body -->
+                <div class="container pt-3">
+                    <div class="row">
+                        <div class="col">
+                            <form action="/payment/price" method="POST">
+
+                                <!-- Send hidden ID to Update -->
+                                <input id="price-id" type="hidden" name="price-id" value="">
+
+                                <!-- Old Price -->
+                                <div class="form-group">
+                                    <label for="old-price">Current Price</label>
+                                    <input name="old-price" type="text" class="form-control" id="old-price" disabled>
+                                </div>
+
+                                <!-- New Price -->
+                                <div class="form-group">
+                                    <label for="new-price">New Price</label>
+                                    <input name="new-price" type="text" class="form-control" id="new-price">
+                                </div>
+                        </div>
+                    </div>
+
+
+                    <!-- End Body -->
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary btn-block">Save changes</button>
+                <button type="submit" class="btn btn-primary btn-block">Save changes</button>
+                </form>
             </div>
         </div>
     </div>

@@ -18,6 +18,7 @@ class Admin extends BaseController
 
     public function index()
     {
+
         if ((session()->get('data')) == null) {
             return redirect()->to('/auth');
         }

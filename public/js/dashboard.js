@@ -1,4 +1,20 @@
-// // CREATE AND UPDATE FORM
+// // DASHBOARD DETAIL
+// ( PRICE, TOTAL, FEMALE, MALE )
+
+$(function () {
+  //   console.log("Aman");
+
+  //   PRICE
+  $("#price-button").on("click", function () {
+    //   Get Old Price
+    let oldPrice = $(this).data("price");
+    let id = $(this).data("id");
+
+    //   Set Old price to form input
+    $("input#old-price").val(oldPrice);
+    $("input#price-id").val(id);
+  });
+});
 
 // $(function () {
 //   // Prepare DOM
