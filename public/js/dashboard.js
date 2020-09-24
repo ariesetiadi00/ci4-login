@@ -2,8 +2,6 @@
 // ( PRICE, TOTAL, FEMALE, MALE )
 
 $(function () {
-  //   console.log("Aman");
-
   //   PRICE
   $("#price-button").on("click", function () {
     //   Get Old Price
@@ -13,6 +11,76 @@ $(function () {
     //   Set Old price to form input
     $("input#old-price").val(oldPrice);
     $("input#price-id").val(id);
+  });
+
+  $.ajax({
+    url: "/member/get_member",
+    dataType: "JSON",
+    method: "POST",
+    success: (data) => {
+      // Separate all member data
+      const member = data["member"];
+      const female = data["female"];
+      const male = data["male"];
+
+      // Prepare Table HTML
+      let html = "<tr><th>#</th><th>Name</th></tr>";
+      let table = "";
+
+      // If Member Button
+      $("#total-button").on("click", function () {
+        // Reset Table String Manually
+        table = "";
+
+        // Set Modal Tittle
+        $("#memberDetailModalLabel").html("All Members");
+
+        // Looping Datra
+        member.forEach((data, i) => {
+          table +=
+            "<tr><td>" + (i + 1) + "</td><td>" + data["name"] + "</td></tr>";
+        });
+
+        // Insert table
+        $("table#memberDetail").html(html + table);
+      });
+
+      // If Female Button
+      $("#female-button").on("click", function () {
+        // Reset Table String Manually
+        table = "";
+
+        // Set Modal Tittle
+        $("#memberDetailModalLabel").html("Female Members");
+
+        // Looping Datra
+        female.forEach((data, i) => {
+          table +=
+            "<tr><td>" + (i + 1) + "</td><td>" + data["name"] + "</td></tr>";
+        });
+
+        // Insert table
+        $("table#memberDetail").html(table);
+      });
+
+      // If Mala Button
+      $("#male-button").on("click", function () {
+        // Reset Table String Manually
+        table = "";
+
+        // Set Modal Tittle
+        $("#memberDetailModalLabel").html("Male Members");
+
+        // Looping Datra
+        male.forEach((data, i) => {
+          table +=
+            "<tr><td>" + (i + 1) + "</td><td>" + data["name"] + "</td></tr>";
+        });
+
+        // Insert table
+        $("table#memberDetail").html(table);
+      });
+    },
   });
 });
 

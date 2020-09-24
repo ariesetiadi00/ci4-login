@@ -30,13 +30,19 @@
             </button>
         </td>
         <td>
-            <h2><?= count($member[0]) ?></h2>
+            <button id="total-button" type="button" class="btn" data-toggle="modal" data-target="#memberDetailModal">
+                <h2><?= count($member[0]) ?></h2>
+            </button>
         </td>
         <td>
-            <h2><?= count($member[1]) ?></h2>
+            <button id="female-button" type="button" class="btn" data-toggle="modal" data-target="#memberDetailModal">
+                <h2><?= count($member[1]) ?></h2>
+            </button>
         </td>
         <td>
-            <h2><?= count($member[2]) ?></h2>
+            <button id="male-button" type="button" class="btn" data-toggle="modal" data-target="#memberDetailModal">
+                <h2><?= count($member[2]) ?></h2>
+            </button>
         </td>
     </tr>
     <tr>
@@ -73,13 +79,9 @@
     <?php endforeach; ?>
 </table>
 
+<!-- ===================================================================== -->
 
-
-<!-- ==================================================================================================
-================================================================================================== -->
-
-
-<!-- Modal -->
+<!-- Price Modal -->
 <div class="modal fade" id="priceModal" tabindex="-1" role="dialog" aria-labelledby="priceModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -120,6 +122,30 @@
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary btn-block">Save changes</button>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================================================================== -->
+
+<!-- Member Count Modal -->
+<div class="modal fade" id="memberDetailModal" tabindex="-1" aria-labelledby="memberDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="memberDetailModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table id="memberDetail" class="table">
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

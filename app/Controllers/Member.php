@@ -184,4 +184,21 @@ class Member extends BaseController
         // echo json_encode(array('member' => $member, 'status' => $status, 'history' => $history));
         return $data;
     }
+
+    public function get_member()
+    {
+
+        $data = [
+            // Get All Member
+            'member' => $this->db->table('member')->get()->getResultArray(),
+            // Get Female
+            'female' => $this->db->table('member')->where('gender', 'f')->get()->getResultArray(),
+            // Get Male
+            'male' => $this->db->table('member')->where('gender', 'm')->get()->getResultArray()
+
+        ];
+
+        // Return Data Member
+        echo json_encode($data);
+    }
 }
