@@ -26,7 +26,6 @@ class Member extends BaseController
 
     public function index()
     {
-
         // $member = $this->memberModel->findAll();
         $member = $this->memberModel->getAll();
 
@@ -34,7 +33,7 @@ class Member extends BaseController
             'title' => 'Member',
             'member' => $member,
             'user' => $this->user,
-            'time' => $this->time->getMonth(),
+            'time' => $this->time->getMonth('Asia/Shanghai'),
             'db' => $this->db
         ];
 
@@ -68,8 +67,8 @@ class Member extends BaseController
             'phone' => $this->request->getVar('phone'),
             'gender' => $this->request->getVar('gender'),
             'image' => $this->request->getVar('image'),
-            'created_at' => $this->time->now(),
-            'updated_at' => $this->time->now()
+            'created_at' => $this->time->now('Asia/Shanghai'),
+            'updated_at' => $this->time->now('Asia/Shanghai')
         ];
 
         $this->memberModel->save($data);
@@ -115,7 +114,7 @@ class Member extends BaseController
             'phone' => $this->request->getVar('phone'),
             'gender' => $this->request->getVar('gender'),
             'image' => $this->request->getVar('image'),
-            'updated_at' => $this->time->now()
+            'updated_at' => $this->time->now('Asia/Shanghai')
         ];
 
         $this->memberModel->save($data);
@@ -156,11 +155,20 @@ class Member extends BaseController
         $data = [
             'title' => 'Edit Member',
             'user' => $this->user,
-            'time' => $this->time->getMonth(),
+            'time' => $this->time->getMonth('Asia/Shanghai'),
             'member' => $member[0][0],
             'status' => $member[1],
             'history' => $member[2]
         ];
+
+        // If Not Paid
+        if (!$data['status']) {
+            
+            echo "true";
+        } else {
+            // If Paid
+            echo "False";
+        }
         // If empty, redirect to create page.
         return view('member/detail', $data);
     }

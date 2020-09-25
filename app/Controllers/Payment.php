@@ -2,9 +2,6 @@
 
 namespace App\Controllers;
 
-use CodeIgniter\CodeIgniter;
-use CodeIgniter\Config\Config;
-
 class Payment extends BaseController
 {
 
@@ -22,9 +19,9 @@ class Payment extends BaseController
         // Database = [id, member_id, pay_desc, date_time, amount]
         $data = [
             'member_id' => $this->request->getVar('id'),
-            'month' => $this->time->getMonth(),
+            'month' => $this->time->getMonth('Asia/Shanghai'),
             'amount' => $this->price,
-            'created_at' => $this->time->now()
+            'created_at' => $this->time->now('Asia/Shanghai')
         ];
 
         // Save Data
@@ -43,7 +40,7 @@ class Payment extends BaseController
         $data = [
             'id' => $this->request->getVar('price-id'),
             'price' => $this->request->getVar('new-price'),
-            'updated_at' => $this->time->now()
+            'updated_at' => $this->time->now('Asia/Shanghai')
         ];
 
         // Update database

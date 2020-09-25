@@ -68,18 +68,15 @@ class Config
 	public static function get(string $name, bool $getShared = true)
 	{
 		$class = $name;
-		if (($pos = strrpos($name, '\\')) !== false)
-		{
+		if (($pos = strrpos($name, '\\')) !== false) {
 			$class = substr($name, $pos + 1);
 		}
 
-		if (! $getShared)
-		{
+		if (!$getShared) {
 			return self::createClass($name);
 		}
 
-		if (! isset( self::$instances[$class] ))
-		{
+		if (!isset(self::$instances[$class])) {
 			self::$instances[$class] = self::createClass($name);
 		}
 		return self::$instances[$class];
@@ -119,27 +116,23 @@ class Config
 	 */
 	private static function createClass(string $name)
 	{
-		if (class_exists($name))
-		{
+		if (class_exists($name)) {
 			return new $name();
 		}
 
 		$locator = Services::locator();
 		$file    = $locator->locateFile($name, 'Config');
 
-		if (empty($file))
-		{
+		if (empty($file)) {
 			// No file found - check if the class was namespaced
-			if (strpos($name, '\\') !== false)
-			{
+			if (strpos($name, '\\') !== false) {
 				// Class was namespaced and locateFile couldn't find it
 				return null;
 			}
 
 			// Check all namespaces
 			$files = $locator->search('Config/' . $name);
-			if (empty($files))
-			{
+			if (empty($files)) {
 				return null;
 			}
 
@@ -149,8 +142,7 @@ class Config
 
 		$name = $locator->getClassname($file);
 
-		if (empty($name))
-		{
+		if (empty($name)) {
 			return null;
 		}
 
