@@ -163,11 +163,15 @@ class Member extends BaseController
 
         // If Not Paid
         if (!$data['status']) {
-            
-            echo "true";
+            // Insert PAyment Debt
+            $debt = [
+                'member_id' => $data['member']['id'],
+                'month' => $data['time'],
+                'created_at' => $this->time->now('Asia/Shanghai')
+            ];
+            // dd($debt);
         } else {
             // If Paid
-            echo "False";
         }
         // If empty, redirect to create page.
         return view('member/detail', $data);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 11, 2020 at 05:14 AM
+-- Generation Time: Sep 29, 2020 at 09:47 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -31,6 +31,13 @@ SET time_zone = "+00:00";
 CREATE TABLE `member` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `birth_place` varchar(255) NOT NULL,
+  `birth_date` date NOT NULL,
+  `religion` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `gender` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -39,15 +46,123 @@ CREATE TABLE `member` (
 -- Dumping data for table `member`
 --
 
-INSERT INTO `member` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Putu Arie Setiadi ', '2020-09-04 04:13:56', '2020-09-04 04:13:56'),
-(2, 'Arie Setiadi', '2020-09-04 04:23:33', '2020-09-04 04:23:33'),
-(3, 'Roger Setiadi', '2020-09-04 04:23:33', '2020-09-04 04:23:33'),
-(4, 'Roger Federer', '2020-09-04 04:23:33', '2020-09-04 04:23:33'),
-(5, 'Arie Federer', '2020-09-04 04:23:33', '2020-09-04 04:23:33'),
-(6, 'Suastra Setiadi', '2020-09-04 04:23:33', '2020-09-04 04:23:33'),
-(7, 'Roger Suastra', '2020-09-04 04:23:33', '2020-09-04 04:23:33'),
-(8, 'Roger Arie', '2020-09-04 04:23:33', '2020-09-04 04:23:33');
+INSERT INTO `member` (`id`, `name`, `address`, `birth_place`, `birth_date`, `religion`, `phone`, `gender`, `image`, `created_at`, `updated_at`) VALUES
+(2, 'Arie Setiadi', '', '', '0000-00-00', '', '', 'f', '', '2020-09-04 04:23:33', '2020-09-04 04:23:33'),
+(3, 'Roger Setiadi', '', '', '0000-00-00', '', '', 'm', '', '2020-09-04 04:23:33', '2020-09-04 04:23:33'),
+(4, 'Roger Federer', '', '', '0000-00-00', '', '', 'f', '', '2020-09-04 04:23:33', '2020-09-04 04:23:33'),
+(5, 'Arie Federer', '', '', '0000-00-00', '', '', 'm', '', '2020-09-04 04:23:33', '2020-09-04 04:23:33'),
+(6, 'Suastra Setiadi', '', '', '0000-00-00', '', '', 'm', '', '2020-09-04 04:23:33', '2020-09-04 04:23:33'),
+(7, 'Roger Suastra', '', '', '0000-00-00', '', '', 'm', '', '2020-09-04 04:23:33', '2020-09-04 04:23:33'),
+(8, 'Roger Arie', '', '', '0000-00-00', '', '', 'f', '', '2020-09-04 04:23:33', '2020-09-04 04:23:33'),
+(10, 'Arie Arie', '', '', '0000-00-00', '', '', 'm', '', '2020-09-18 22:58:19', '2020-09-18 22:58:19'),
+(11, 'Putu Putu', 'Mengwi', 'Denpasar', '2000-08-29', 'Islam', '082100000000', 'm', 'd-male.png', '2020-09-18 23:03:49', '2020-09-22 06:00:11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `member_gender`
+--
+
+CREATE TABLE `member_gender` (
+  `id` int(11) NOT NULL,
+  `gender` varchar(255) NOT NULL,
+  `value` varchar(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `member_gender`
+--
+
+INSERT INTO `member_gender` (`id`, `gender`, `value`) VALUES
+(1, 'Male', 'm'),
+(2, 'Female', 'f');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `member_payment`
+--
+
+CREATE TABLE `member_payment` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `month` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `member_payment`
+--
+
+INSERT INTO `member_payment` (`id`, `member_id`, `month`, `amount`, `created_at`) VALUES
+(1, 1, 9, 400000, '2020-09-15 00:18:00'),
+(2, 3, 9, 400000, '2020-09-15 00:18:07'),
+(3, 5, 9, 400000, '2020-09-15 00:18:13'),
+(4, 7, 9, 400000, '2020-09-15 00:18:19'),
+(5, 2, 9, 400000, '2020-09-16 07:47:06'),
+(6, 4, 9, 400000, '2020-09-16 08:25:40'),
+(7, 1, 8, 400000, '2020-09-17 13:47:48'),
+(8, 1, 7, 400000, '2020-09-17 13:47:48'),
+(10, 11, 9, 400000, '2020-09-22 19:19:28'),
+(15, 14, 9, 475000, '2020-09-24 07:47:01'),
+(16, 10, 9, 475000, '2020-09-25 09:08:41');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `member_payment_debt`
+--
+
+CREATE TABLE `member_payment_debt` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `month` int(11) NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `member_payment_price`
+--
+
+CREATE TABLE `member_payment_price` (
+  `id` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `member_payment_price`
+--
+
+INSERT INTO `member_payment_price` (`id`, `price`, `created_at`, `updated_at`) VALUES
+(1, 475000, '2020-09-17', '2020-09-24 07:44:01');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `member_religion`
+--
+
+CREATE TABLE `member_religion` (
+  `id` int(11) NOT NULL,
+  `religion` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `member_religion`
+--
+
+INSERT INTO `member_religion` (`id`, `religion`) VALUES
+(1, 'Islam'),
+(2, 'Hindu'),
+(3, 'Protestan'),
+(4, 'Katolik'),
+(5, 'Buddha'),
+(6, 'Khonghucu');
 
 -- --------------------------------------------------------
 
@@ -205,6 +320,36 @@ ALTER TABLE `member`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `member_gender`
+--
+ALTER TABLE `member_gender`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `member_payment`
+--
+ALTER TABLE `member_payment`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `member_payment_debt`
+--
+ALTER TABLE `member_payment_debt`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `member_payment_price`
+--
+ALTER TABLE `member_payment_price`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `member_religion`
+--
+ALTER TABLE `member_religion`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -248,7 +393,37 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `member_gender`
+--
+ALTER TABLE `member_gender`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `member_payment`
+--
+ALTER TABLE `member_payment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `member_payment_debt`
+--
+ALTER TABLE `member_payment_debt`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `member_payment_price`
+--
+ALTER TABLE `member_payment_price`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `member_religion`
+--
+ALTER TABLE `member_religion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -284,7 +459,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
