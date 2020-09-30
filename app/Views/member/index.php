@@ -1,9 +1,10 @@
 <?= $this->extend('layout/template_main'); ?>
 <?= $this->section('content'); ?>
 <?php $i = 1 ?>
-<h1>Member</h1>
+
+<!-- <h1>Member</h1> -->
 <div class="my-3">
-    <a href="/member/create" class="add-button btn btn-sm btn-primary" data-toggle="modal" data-target="#memberModal">Add New Member</a>
+    <a href="/member/create" class="btn btn-sm btn-primary">Add New Member</a>
 </div>
 
 <!-- Message -->
@@ -17,6 +18,7 @@
 <?php endif; ?>
 <!-- End Message -->
 
+<!-- Table Header -->
 <table class="table member">
     <tr>
         <th>#</th>
@@ -24,6 +26,9 @@
         <th>Status</th>
         <th></th>
     </tr>
+
+    <!-- variable data to check payment status -->
+    <?php $data = 1; ?>
     <?php foreach ($member as $m) : ?>
 
         <!-- Get payment data per member -->
@@ -31,14 +36,15 @@
 
         $id = $m['id'];
 
-        $query = "SELECT * FROM member 
-                INNER JOIN member_payment 
-                ON member.id = member_payment.member_id 
-                WHERE member.id = $id 
+        // Select this member on today's month.
+        // If 1 => Paid // If 0 => Not Paid
+        $query = "SELECT * FROM member
+                INNER JOIN member_payment
+                ON member.id = member_payment.member_id
+                WHERE member.id = $id
                 AND member_payment.month = $time";
         $data = $db->query($query)->getResultArray();
         ?>
-
 
         <tr>
             <td class="middle-div"><?= $i++ ?></td>
@@ -50,136 +56,84 @@
                 </div>
             </td>
             <td class="middle-div">
-                <a href="/member/get" class="detail-button btn btn-sm" data-toggle="modal" data-target="#detailMemberModal" data-id="<?= $m['id'] ?>">Detail</a>
+                <a href="/member/detail/<?= $m['id'] ?>" class="detail-button btn btn-sm" data-id="<?= $m['id'] ?>">Detail</a>
 
-                <a href="/member/edit" class="edit-button btn btn-sm" data-toggle="modal" data-target="#memberModal" data-id="<?= $m['id'] ?>">Edit</a>
+                <a href="/member/edit/<?= $m['id'] ?>" class="edit-button btn btn-sm">Edit</a>
 
-                <a href="/member/delete/<?= $m['id'] ?>" class="deleteButton btn btn-sm btn-danger" onclick="return confirm('Delete Member')">Delete</a>
+                <a id="delete-button" href="/member/delete/<?= $m['id'] ?>" class="delete-button btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal" data-mid="<?= $m['id'] ?>">Delete</a>
             </td>
         </tr>
     <?php endforeach; ?>
 </table>
 
+<!-- =================================================================== -->
 
-
-
-<!-- Member Insert and Update Modal-->
-<div class="modal fade" id="memberModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="memberLabel">Add New Member</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Start Form -->
-                <form action="/member/create" method="POST" class="user">
-                    <input type="hidden" id="id" name="id">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="name" id="name" placeholder="Name" required autocomplete="off" ">
-                    </div>
-                    <div class=" modal-footer">
-                        <button id="memberButton" type="submit" class="btn btn-primary btn-block">
-                            Submit
-                        </button>
-                    </div>
-                </form>
-                <!-- End Form -->
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Get Member Detail Modal -->
-<div class="modal fade" id="detailMemberModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="memberLabel">Detail</h5>
+                <h5 class="modal-title" id="deleteModalLabel">Delete Member</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="container">
-                    <div class="row text-center">
+                    <<<<<<< HEAD <div class="row text-center">
                         <div class="col mb-3">
                             <h2 class="member-name">Arie Setiadi</h2>
                         </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 text-center p-2">
+                        <img class="member-image w-75 rounded-circle c-shadow" src="/img/profile/d-male.png" alt="Profile">
                     </div>
-                    <div class="row">
-                        <div class="col-lg-4 text-center p-2">
-                            <img class="member-image w-75 rounded-circle c-shadow" src="/img/profile/d-male.png" alt="Profile">
-                        </div>
-                        <div class="member-desc col-lg-8 text-center p-2 align-self-center">
-                            <h5>Member Detail</h5>
-                            <h5>Member Detail</h5>
-                            <h5>Member Detail</h5>
-                            <h5>Member Detail</h5>
-                            <h5>Member Detail</h5>
-                        </div>
+                    <div class="member-desc col-lg-8 text-center p-2 align-self-center">
+                        <h5>Member Detail</h5>
+                        <h5>Member Detail</h5>
+                        <h5>Member Detail</h5>
+                        <h5>Member Detail</h5>
+                        <h5>Member Detail</h5>
                     </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col">
-                            <form class="pay" action="/payment/" method="post">
-                                <input class="id" type="hidden" name="id">
-                                <button class="btn btn-block btn-success <?= (!$data) ? 'disabled' : '' ?>" type="submit" id="pay" name="pay" onclick='return confirm("Confirm payment from this member")'>
-                                    Confirm Payment
-                                </button>
-                            </form>
-                        </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col">
+                        <form class="pay" action="/payment/" method="post">
+                            <input class="id" type="hidden" name="id">
+                            <button class="btn btn-block btn-success <?= (!$data) ? 'disabled' : '' ?>" type="submit" id="pay" name="pay" onclick='return confirm("Confirm payment from this member")'>
+                                Confirm Payment
+                            </button>
+                        </form>
                     </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col">
-                            <h6 class="text-center">Payment History</h6>
-                            <table class="table">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Description</th>
-                                    <th>Date Time</th>
-                                    <th>Amount</th>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Payment in June</td>
-                                    <td>29 June 2020</td>
-                                    <td>Rp. 400.000</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Payment in July</td>
-                                    <td>29 July 2020</td>
-                                    <td>Rp. 400.000</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Payment in August</td>
-                                    <td>29 June 2020</td>
-                                    <td>Rp. 400.000</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Payment in September</td>
-                                    <td>29 September 2020</td>
-                                    <td>Rp. 400.000</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Payment in October</td>
-                                    <td>29 October 2020</td>
-                                    <td>Rp. 400.000</td>
-                                </tr>
-                            </table>
-                        </div>
+                </div>
+                <hr>
+                =======
+                >>>>>>> 1f86696822b9e7a604071d46f2b8658323a19d9e
+                <div class="row">
+                    <div class="col">
+                        <form id="delete-form" action="/member/delete" method="POST">
+
+                            <!-- Hidden input for id -->
+                            <input id="delete-id" name="delete-id" type="hidden">
+
+                            <!-- Delete Payment Checkbox -->
+                            <div class="custom-control custom-checkbox">
+                                <input name="delete-check" type="checkbox" class="custom-control-input" id="delete-check">
+                                <label class="custom-control-label" for="delete-check">Delete member payment history</label>
+                            </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">OK</button>
+            </form>
+        </div>
     </div>
+</div>
 </div>
 
 <?= $this->endSection(); ?>

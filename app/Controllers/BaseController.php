@@ -46,8 +46,14 @@ class BaseController extends Controller
 		//--------------------------------------------------------------------
 		// E.g.:
 		// $this->session = \Config\Services::session();
+
+		// Start Session
 		session();
+
+		// Initiate time class
 		$this->time = new Time();
+
+		// Get Database connection
 		$this->db = \Config\Database::connect();
 
 

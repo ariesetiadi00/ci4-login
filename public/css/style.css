@@ -12,12 +12,7 @@
 }
 td,
 th,
-tr {
+tr,
+h1 {
   text-align: center;
-}
-.middle-div {
-  vertical-align: middle;
-}
-.center-div {
-  margin: 0 auto;
 }

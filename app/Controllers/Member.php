@@ -4,50 +4,74 @@ namespace App\Controllers;
 
 use App\Models\MemberModel;
 use App\Models\UserModel;
+use CodeIgniter\I18n\Time;
 
 class Member extends BaseController
 {
     protected $memberModel;
     protected $userModel;
+    protected $time;
+    protected $user;
 
     public function __construct()
     {
         $this->memberModel = new MemberModel();
         $this->userModel = new UserModel();
+        $this->time = new Time();
+
+        // Get User Account
+        $id = session()->get('data')['user_id'];
+        $this->user = $this->userModel->find($id);
     }
+
     public function index()
     {
-
-        $data = session()->get('data');
-        $id = $data['user_id'];
-        $user = $this->userModel->find($id);
-        $key = $this->request->getVar('key');
-        if ($key) {
-            $member = $this->memberModel->search($key)->getResultArray();
-            // $member = $this->memberModel->like('nama', $key);
-        } else {
-            $member = $this->memberModel->findAll();
-        }
+        // $member = $this->memberModel->findAll();
+        $member = $this->memberModel->getAll();
 
         $data = [
             'title' => 'Member',
             'member' => $member,
-            'key' => $key,
-            'user' => $user,
+            'user' => $this->user,
+            'time' => $this->time->getMonth('Asia/Shanghai'),
+            'db' => $this->db
+        ];
+
+        // dd($data);
+
+        return view('member/index', $data);
+    }
+
+    public function create()
+    {
+        // Variable Initial
+        $data = [
+            'title' => 'New Member',
+            'user' => $this->user,
             'time' => $this->time->getMonth(),
             'db' => $this->db
         ];
-        return view('member/index', $data);
+        // If empty, redirect to create page.
+        return view('member/create', $data);
     }
-    public function create()
-    {
-        $name = $this->request->getVar('name');
 
-        $this->memberModel->save([
-            'name' => $name,
-            'created_at' => $this->time::now(),
-            'updated_at' => $this->time::now()
-        ]);
+    public function insert()
+    {
+        // dd($this->request->getVar());
+        $data = [
+            'name' => $this->request->getVar('name'),
+            'address' => $this->request->getVar('address'),
+            'birth_place' => $this->request->getVar('birth_place'),
+            'birth_date' => $this->request->getVar('birth_date'),
+            'religion' => $this->request->getVar('religion'),
+            'phone' => $this->request->getVar('phone'),
+            'gender' => $this->request->getVar('gender'),
+            'image' => $this->request->getVar('image'),
+            'created_at' => $this->time->now('Asia/Shanghai'),
+            'updated_at' => $this->time->now('Asia/Shanghai')
+        ];
+
+        $this->memberModel->save($data);
 
         session()->setFlashData('strong', 'Insert');
         session()->setFlashData('message', 'Success');
@@ -55,28 +79,66 @@ class Member extends BaseController
         return redirect()->to('/member/index');
     }
 
-    public function edit()
+    public function edit($id)
+    {
+        // Get Member detail
+        $member = $this->memberModel->find($id);
+        // Get religion and gender to looping the form
+        $religion = $this->db->query("SELECT * FROM member_religion")->getResultArray();
+        $gender = $this->db->query("SELECT * FROM member_gender")->getResultArray();
+
+        /// Variable Initial
+        $data = [
+            'title' => 'Edit Member',
+            'user' => $this->user,
+            'time' => $this->time->getMonth(),
+            'db' => $this->db,
+            'member' => $member,
+            'religion' => $religion,
+            'gender' => $gender
+        ];
+        // If empty, redirect to create page.
+        return view('member/edit', $data);
+    }
+
+    public function update()
     {
         // Prepare array data
         $data = [
             'id' => $this->request->getVar('id'),
-            'name' => $this->request->getVar('name')
+            'name' => $this->request->getVar('name'),
+            'address' => $this->request->getVar('address'),
+            'birth_place' => $this->request->getVar('birth_place'),
+            'birth_date' => $this->request->getVar('birth_date'),
+            'religion' => $this->request->getVar('religion'),
+            'phone' => $this->request->getVar('phone'),
+            'gender' => $this->request->getVar('gender'),
+            'image' => $this->request->getVar('image'),
+            'updated_at' => $this->time->now('Asia/Shanghai')
         ];
 
-        // Update
         $this->memberModel->save($data);
 
-        // Redirect
-        session()->setFlashData('strong', 'Edit');
+        session()->setFlashData('strong', 'Update');
         session()->setFlashData('message', 'Success');
 
         return redirect()->to('/member/index');
     }
 
-    public function delete($id)
+    public function delete()
     {
+        // Get POST Data
+        $id = (int)$this->request->getVar('delete-id');
+
+        // If ON, delete history
+        if ($this->request->getVar('delete-check') == 'on') {
+            // Delete history
+            $this->db->table('member_payment')->delete(['member_id' => $id]);
+        }
+
         // Delete
-        $this->memberModel->delete($id);
+        // $this->memberModel->delete($id);
+        $this->db->table('member')->delete(['id' => $id]);
 
         // Redirect
         session()->setFlashData('strong', 'Delete');
@@ -85,12 +147,74 @@ class Member extends BaseController
         return redirect()->to('/member/index');
     }
 
-    public function get()
+    public function detail($id)
     {
-        $id = $_POST['id'];
-        $member = $this->db->query("SELECT * FROM member WHERE id = $id")->getResultArray();
+        $member = $this->get($id);
 
+        /// Variable Initial    
+        $data = [
+            'title' => 'Edit Member',
+            'user' => $this->user,
+            'time' => $this->time->getMonth('Asia/Shanghai'),
+            'member' => $member[0][0],
+            'status' => $member[1],
+            'history' => $member[2]
+        ];
 
-        echo json_encode($member);
+        // If Not Paid
+        if (!$data['status']) {
+            
+            echo "true";
+        } else {
+            // If Paid
+            echo "False";
+        }
+        // If empty, redirect to create page.
+        return view('member/detail', $data);
+    }
+
+    public function get($id)
+    {
+        // $id = $_POST['id'];
+        $time = $this->time->getMonth();
+
+        // Select one member detail
+        $query_1 = "SELECT * FROM member WHERE id = $id";
+
+        // Select member that have paid on this month
+        $query_2 = "SELECT * FROM member
+                    INNER JOIN member_payment
+                    ON member.id = member_payment.member_id
+                    WHERE member.id = $id
+                    AND member_payment.month = $time";
+
+        // Select all this member  payment history
+        $query_3 = "SELECT * FROM member_payment
+                    WHERE member_payment.member_id = $id";
+
+        $member = $this->db->query($query_1)->getResultArray();
+        $status = $this->db->query($query_2)->getRowArray();
+        $history = $this->db->query($query_3)->getResultArray();
+
+        $data = [$member, $status, $history];
+        // echo json_encode(array('member' => $member, 'status' => $status, 'history' => $history));
+        return $data;
+    }
+
+    public function get_member()
+    {
+
+        $data = [
+            // Get All Member
+            'member' => $this->db->table('member')->get()->getResultArray(),
+            // Get Female
+            'female' => $this->db->table('member')->where('gender', 'f')->get()->getResultArray(),
+            // Get Male
+            'male' => $this->db->table('member')->where('gender', 'm')->get()->getResultArray()
+
+        ];
+
+        // Return Data Member
+        echo json_encode($data);
     }
 }
