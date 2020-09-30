@@ -24,23 +24,26 @@ $(function () {
       const male = data["male"];
 
       // Prepare Table HTML
-      let html = "<tr><th>#</th><th>Name</th></tr>";
+      let html = "<tr><th>#</th><th>Profile</th><th>Name</th></tr>";
       let table = "";
 
       // If Member Button
       $("#total-button").on("click", function () {
         // Reset Table String Manually
         table = "";
-
         // Set Modal Tittle
         $("#memberDetailModalLabel").html("All Members");
-
-        // Looping Datra
+        // Looping Data
         member.forEach((data, i) => {
           table +=
-            "<tr><td>" + (i + 1) + "</td><td>" + data["name"] + "</td></tr>";
+            "<tr><td>" +
+            (i + 1) +
+            "</td><td><img class='s-profile' src='/img/profile/" +
+            data["image"] +
+            "'></td><td>" +
+            data["name"] +
+            "</td></tr>";
         });
-
         // Insert table
         $("table#memberDetail").html(html + table);
       });
@@ -49,34 +52,40 @@ $(function () {
       $("#female-button").on("click", function () {
         // Reset Table String Manually
         table = "";
-
         // Set Modal Tittle
         $("#memberDetailModalLabel").html("Female Members");
-
         // Looping Datra
         female.forEach((data, i) => {
           table +=
-            "<tr><td>" + (i + 1) + "</td><td>" + data["name"] + "</td></tr>";
+            "<tr><td>" +
+            (i + 1) +
+            "</td><td><img class='s-profile' src='/img/profile/" +
+            data["image"] +
+            "'></td><td>" +
+            data["name"] +
+            "</td></tr>";
         });
-
         // Insert table
         $("table#memberDetail").html(table);
       });
 
-      // If Mala Button
+      // If Male Button
       $("#male-button").on("click", function () {
         // Reset Table String Manually
         table = "";
-
         // Set Modal Tittle
         $("#memberDetailModalLabel").html("Male Members");
-
         // Looping Datra
         male.forEach((data, i) => {
           table +=
-            "<tr><td>" + (i + 1) + "</td><td>" + data["name"] + "</td></tr>";
+            "<tr><td>" +
+            (i + 1) +
+            "</td><td><img class='s-profile' src='/img/profile/" +
+            data["image"] +
+            "'></td><td>" +
+            data["name"] +
+            "</td></tr>";
         });
-
         // Insert table
         $("table#memberDetail").html(table);
       });
