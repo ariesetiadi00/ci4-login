@@ -12,12 +12,14 @@ class Member extends BaseController
     protected $userModel;
     protected $time;
     protected $user;
+    public static $sdb;
 
     public function __construct()
     {
         $this->memberModel = new MemberModel();
         $this->userModel = new UserModel();
         $this->time = new Time();
+        self::$sdb = \Config\Database::connect();
 
         // Get User Account
         $id = session()->get('data')['user_id'];
@@ -158,21 +160,33 @@ class Member extends BaseController
             'time' => $this->time->getMonth('Asia/Shanghai'),
             'member' => $member[0][0],
             'status' => $member[1],
-            'history' => $member[2]
+            'history' => $member[2],
+            'db' => $this->db
         ];
 
         // If Not Paid
         if (!$data['status']) {
+
             // Insert PAyment Debt
             $debt = [
                 'member_id' => $data['member']['id'],
                 'month' => $data['time'],
                 'created_at' => $this->time->now('Asia/Shanghai')
             ];
-            // dd($debt);
-        } else {
-            // If Paid
+
+            // Get Debt History
+            $builder = $this->db->table('member_payment_debt');
+            $debt_data = $builder->where([
+                'member_id' => $debt['member_id'],
+                'month' => $debt['month']
+            ])->get()->getResultArray();
+
+            // If debt not exist, insert debt
+            if (!$debt_data) {
+                $this->db->table('member_payment_debt')->insert($debt);
+            }
         }
+
         // If empty, redirect to create page.
         return view('member/detail', $data);
     }
@@ -194,7 +208,8 @@ class Member extends BaseController
 
         // Select all this member  payment history
         $query_3 = "SELECT * FROM member_payment
-                    WHERE member_payment.member_id = $id";
+                    WHERE member_payment.member_id = $id
+                    ORDER BY member_payment.id DESC";
 
         $member = $this->db->query($query_1)->getResultArray();
         $status = $this->db->query($query_2)->getRowArray();
@@ -220,5 +235,18 @@ class Member extends BaseController
 
         // Return Data Member
         echo json_encode($data);
+    }
+
+    public static function get_status($month, $id)
+    {
+        $query = "SELECT * FROM member
+                INNER JOIN member_payment
+                ON member.id = member_payment.member_id
+                WHERE member.id = $id
+                AND member_payment.month = $month";
+
+
+        $status = self::$sdb->query($query)->getResultArray();
+        return $status;
     }
 }

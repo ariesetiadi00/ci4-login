@@ -15,15 +15,13 @@ class Payment extends BaseController
 
     public function index()
     {
-
         // Database = [id, member_id, pay_desc, date_time, amount]
         $data = [
             'member_id' => $this->request->getVar('id'),
-            'month' => $this->time->getMonth('Asia/Shanghai'),
+            'month' => $this->request->getVar('month'),
             'amount' => $this->price,
             'created_at' => $this->time->now('Asia/Shanghai')
         ];
-
         // Save Data
 
         $this->db->table('member_payment')->insert($data);
@@ -33,7 +31,6 @@ class Payment extends BaseController
 
         return redirect()->to('/member/detail/' . $data['member_id']);
     }
-
     public function price()
     {
         // Prepare Array to Update

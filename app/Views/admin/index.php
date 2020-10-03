@@ -8,19 +8,19 @@
     <tr>
         <th>
             <i class="fas fa-money-check-alt"></i>
-            Current Price (Rp)
+            Harga (Rp)
         </th>
         <th>
             <i class="fas fa-users"></i>
-            Total Member
+            Jumlah Member
         </th>
         <th>
             <i class="fas fa-venus"></i>
-            Female Member
+            Member Wanita
         </th>
         <th>
             <i class="fas fa-mars"></i>
-            Male Member
+            Member Pria
         </th>
     </tr>
     <tr>
@@ -55,23 +55,23 @@
 
 <div class=" text-center mb-3">
     <i class="fas fa-list-alt"></i>
-    Payment History
+    Riwayat Pembayaran
 </div>
 
 <table class="table">
     <tr>
         <th>#</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Paid at</th>
-        <th>Amount</th>
+        <th>Nama</th>
+        <th>Deskripsi</th>
+        <th>Tanggal</th>
+        <th>Jumlah</th>
     </tr>
     <?php $i = 1 ?>
     <?php foreach ($payment as $p) : ?>
         <tr>
             <td><?= $i++ ?></td>
             <td><?= $p['name'] ?></td>
-            <td>Payment in <?= date('F', mktime(0, 0, 0, $p['month'])) ?></td>
+            <td>Pembayaran Bulan <?= date('F', mktime(0, 0, 0, $p['month'])) ?></td>
             <td><?= date("j F Y - g:i a", strtotime($p['created_at'])) ?></td>
             <td>Rp. <?= number_format($p['amount'], 2) ?>
             <td>

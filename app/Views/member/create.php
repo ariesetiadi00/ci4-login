@@ -2,8 +2,9 @@
 <?= $this->section('content'); ?>
 
 <div class="container w-75 justify-content-start">
+
     <!-- Member Insert and Update Modal-->
-    <h1>New Member</h1>
+    <h1>Member Baru</h1>
 
     <hr>
 
@@ -19,7 +20,7 @@
             <table class="table table-borderless">
                 <!-- Image -->
                 <tr>
-                    <td>Profile Image</td>
+                    <td>Foto Profile</td>
                     <td>:</td>
                     <td>
                         <div class="form-group">
@@ -30,52 +31,52 @@
 
                 <!-- Name -->
                 <tr>
-                    <td>Name</td>
+                    <td>Nama</td>
                     <td>:</td>
                     <td>
                         <div class=" form-group">
-                            <input type="text" class="form-control" name="name" id="name" placeholder="Insert Member Name" required autocomplete="off">
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Nama Lengkap" required autocomplete="off">
                         </div>
                     </td>
                 </tr>
                 <!-- Address -->
                 <tr>
-                    <td>Address</td>
+                    <td>Alamat</td>
                     <td>:</td>
                     <td>
                         <div class=" form-group">
-                            <input type=" text" class="form-control" name="address" id="address" placeholder="Address" required autocomplete="off">
+                            <input type=" text" class="form-control" name="address" id="address" placeholder="Alamat" required autocomplete="off">
                         </div>
                     </td>
                 </tr>
                 <!-- Birth Place -->
                 <tr>
-                    <td>Place of Birth</td>
+                    <td>Tempat Lahir</td>
                     <td>:</td>
                     <td>
                         <div class=" form-group">
-                            <input type=" text" class="form-control" name="birth_place" id="birth_place" placeholder="Place of birth" required autocomplete="off">
+                            <input type=" text" class="form-control" name="birth_place" id="birth_place" placeholder="Tempat Lahir" required autocomplete="off">
                         </div>
                     </td>
                 </tr>
                 <!-- Birth Date -->
                 <tr>
-                    <td>Date of Birth</td>
+                    <td>Tanggal Lahir</td>
                     <td>:</td>
                     <td>
                         <div class=" form-group">
-                            <input type="date" class="form-control" name="birth_date" id="birth_date" placeholder="Date of birth" required autocomplete="off">
+                            <input type="date" class="form-control" name="birth_date" id="birth_date" placeholder="Tanggal Lahir" required autocomplete="off">
                         </div>
                     </td>
                 </tr>
                 <!-- Religion -->
                 <tr>
-                    <td>Religion</td>
+                    <td>Agama</td>
                     <td>:</td>
                     <td>
                         <div class=" form-group">
                             <select class="custom-select" name="religion" id="religion" onreset="(this.value = '')">
-                                <option id="option-default" hidden selected>Member Religion</option>
+                                <option id="option-default" hidden selected>Agama</option>
                                 <option id="Islam" value="Islam">Islam</option>
                                 <option id="Hindu" value="Hindu">Hindu</option>
                                 <option id="Protestan" value="Protestan">Protestan</option>
@@ -88,30 +89,30 @@
                 </tr>
                 <!-- Phone -->
                 <tr>
-                    <td>Phone Number</td>
+                    <td>Nomor Telepon</td>
                     <td>:</td>
                     <td>
                         <div class=" form-group">
-                            <input type=" text" class="form-control" name="phone" id="phone" placeholder="Phone number" required autocomplete="off">
+                            <input type=" text" class="form-control" name="phone" id="phone" placeholder="Nomor Telepon" required autocomplete="off">
                         </div>
                     </td>
                 </tr>
                 <!-- Gender -->
                 <tr>
-                    <td>Gender</td>
+                    <td>Jenis Kelamin</td>
                     <td>:</td>
                     <td>
                         <div class=" form-group d-flex justify-content-start">
                             <div class="form-check d-inline-block">
                                 <input class="form-check-input" type="radio" name="gender" id="gender1" value="m" checked>
                                 <label class="form-check-label" for="gender1">
-                                    Male
+                                    Pria
                                 </label>
                             </div>
                             <div class="form-check d-inline-block mx-4">
                                 <input class="form-check-input" type="radio" name="gender" id="gender2" value="f">
                                 <label class="form-check-label" for="gender2">
-                                    Female
+                                    Wanita
                                 </label>
                             </div>
                         </div>
@@ -121,13 +122,13 @@
 
 
             <div class=" modal-footer">
-                <!-- Reset -->
-                <button id="resetButton" type="reset" class="btn btn-success btn-block">
-                    Reset
-                </button>
                 <!-- Submit -->
                 <button id="memberButton" type="submit" class="btn btn-primary btn-block">
                     Submit
+                </button>
+                <!-- Reset -->
+                <button id="resetButton" type="reset" class="btn btn-success btn-block">
+                    Reset
                 </button>
             </div>
         </form>
