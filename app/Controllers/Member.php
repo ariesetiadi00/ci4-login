@@ -59,7 +59,27 @@ class Member extends BaseController
 
     public function insert()
     {
-        // dd($this->request->getVar());
+        // Get Image
+        $image = $this->request->getFile('foto');
+        // Get Gender for checking image
+        $gender = $this->request->getVar('gender');
+
+        // If no image uploaded, use default image
+        if ($image->getError() == 4) {
+            if ($gender == 'm') {
+                // Male default
+                $img_name = 'd-male.png';
+            } elseif ($gender == 'f') {
+                // Female default
+                $img_name = 'd-female.png';
+            }
+        } else {
+            // File Name
+            $img_name = $image->getName();
+            // Move File to public/img
+            $image->move('img/profile');
+        }
+
         $data = [
             'name' => $this->request->getVar('name'),
             'address' => $this->request->getVar('address'),
@@ -67,8 +87,8 @@ class Member extends BaseController
             'birth_date' => $this->request->getVar('birth_date'),
             'religion' => $this->request->getVar('religion'),
             'phone' => $this->request->getVar('phone'),
-            'gender' => $this->request->getVar('gender'),
-            'image' => $this->request->getVar('image'),
+            'gender' => $gender,
+            'image' => $img_name,
             'created_at' => $this->time->now('Asia/Shanghai'),
             'updated_at' => $this->time->now('Asia/Shanghai')
         ];

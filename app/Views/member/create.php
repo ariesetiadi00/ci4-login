@@ -18,7 +18,7 @@
 
         <!-- Start Form -->
         <!-- INSERT and UPDATE Form -->
-        <form id="member-form" action="/member/insert" method="POST" class="user">
+        <form id="member-form" action="/member/insert" method="POST" class="user" enctype="multipart/form-data">
 
             <!-- ID place holder for javascript -->
             <input type="hidden" id="id" name="id">
@@ -29,8 +29,11 @@
                     <td>Foto Profile</td>
                     <td>:</td>
                     <td>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="image" id="image" placeholder="Image" required autocomplete="off">
+                        <div class="input-group mb-3">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="foto" name="foto">
+                                <label class="custom-file-label" for="foto">Upload Foto</label>
+                            </div>
                         </div>
                     </td>
                 </tr>
