@@ -88,45 +88,55 @@
                 use App\Controllers\Member;
 
                 // Member Debt
-                $debt = $db->table('member_payment_debt')->where('member_id', $member['id'])->orderBy('month', 'ASC')->get()->getResultArray();
+                $debt = $db->table('member_payment_debt')->where('member_id', $member['id'])->orderBy('id', 'DESC')->limit(2)->get()->getResultArray();
 
                 // Current Price
                 $price = $db->table('member_payment_price')->get()->getResultArray()[0]['price'];
 
-                d($debt);
-
                 ?>
+                <div class="row my-5">
+                    <div class="col">
+                        <h6 class="text-center">Daftar Tagihan</h6>
 
-                <!-- Table Tagihan -->
-                <table class="table">
-                    <?php foreach ($debt as $i =>  $d) : ?>
-                        <?php $status = Member::get_status($d['month'], $member['id']) ?>
-                        <tr>
-                            <td><?= ++$i ?></td>
-                            <td><?= date('F', mktime(0, 0, 0, $d['month'])) ?></td>
-                            <td>Rp. <?= number_format($price, 2) ?></td>
-                            <td>
-                                <form action="/payment/" method="post">
-                                    <!-- Send Hidden ID -->
-                                    <input class="id" value="<?= $member['id'] ?>" type="hidden" name="id">
+                        <!-- Table Tagihan -->
+                        <table class="table">
+                            <tr>
+                                <th>#</th>
+                                <th>Bulan</th>
+                                <th>Jumlah</th>
+                                <th></th>
+                            </tr>
+                            <?php foreach ($debt as $i =>  $d) : ?>
+                                <?php $status = Member::get_status($d['month'], $member['id']) ?>
+                                <tr>
+                                    <td><?= ++$i ?></td>
+                                    <td><?= date('F', mktime(0, 0, 0, $d['month'])) ?></td>
+                                    <td>Rp. <?= number_format($price, 2) ?></td>
+                                    <td>
+                                        <form action="/payment/" method="post">
+                                            <!-- Send Hidden ID -->
+                                            <input class="id" value="<?= $member['id'] ?>" type="hidden" name="id">
 
-                                    <!-- Send Hidden Month -->
-                                    <input type="hidden" id="month" name="month" value="<?= $d['month'] ?>">
+                                            <!-- Send Hidden Month -->
+                                            <input type="hidden" id="month" name="month" value="<?= $d['month'] ?>">
 
-                                    <?php if ($status) : ?>
-                                        <button class="confirm-button btn btn-block btn-primary" type="submit" id="pay" disabled name="pay">
-                                            Sudah Terbayar
-                                        </button>
-                                    <?php else : ?>
-                                        <button class="confirm-button btn btn-block btn-primary" type="submit" id="pay" name="pay" onclick='return confirm("Confirm payment from this member ?")'>
-                                            Bayar Tagihan
-                                        </button>
-                                    <?php endif; ?>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </table>
+                                            <?php if ($status) : ?>
+                                                <button class="confirm-button btn btn-block btn-primary" type="submit" id="pay" disabled name="pay">
+                                                    Sudah Terbayar
+                                                </button>
+                                            <?php else : ?>
+                                                <button class="confirm-button btn btn-block btn-primary" type="submit" id="pay" name="pay" onclick='return confirm("Confirm payment from this member ?")'>
+                                                    Bayar Tagihan
+                                                </button>
+                                            <?php endif; ?>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    </div>
+                </div>
+
 
             </div>
         </div>

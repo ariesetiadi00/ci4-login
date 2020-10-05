@@ -3,7 +3,15 @@
 
 <div class="container w-75 justify-content-start">
     <!-- Member Insert and Update Modal-->
-    <h1>Edit Member</h1>
+    <div class="row">
+        <div class="col mb-3">
+            <a class="d-flex justify-content-start" href="/member/">
+                <i class="fas fa-chevron-left fa-2x"></i>
+            </a>
+            <!-- Member Insert and Update Modal-->
+            <h1>Member Baru</h1>
+        </div>
+    </div>
 
     <hr>
 
