@@ -25,18 +25,26 @@
 
             <table class="table table-borderless">
                 <!-- Image -->
-                <tr>
-                    <td>Foto Profile</td>
-                    <td>:</td>
-                    <td>
+
+                <!-- <tr>
+                    <td></td>
+                    <td colspan="2">
                         <div class="input-group mb-3">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="foto" name="foto">
-                                <label class="custom-file-label" for="foto">Upload Foto</label>
+                            <div class="row">
+                                <div class="col-6">
+                                    <img id="img-preview" src="/img/profile/d-male.png" alt="Default" class="w-50 rounded c-shadow">
+                                </div>
+                                <div class="col-6 d-flex align-items-center">
+                                    <div class="custom-file">
+                                        <input id="img-input" type="file" class="custom-file-input" id="foto" name="foto" onchange="imgPreview()">
+                                        <label id="img-label" class="custom-file-label pr-5" for="foto">Upload Foto</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </td>
-                </tr>
+                </tr> -->
+
 
                 <!-- Name -->
                 <tr>

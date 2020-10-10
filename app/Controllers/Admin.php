@@ -52,7 +52,7 @@ class Admin extends BaseController
 
     public function get_all()
     {
-        $query = "SELECT member.name, member_payment.month, member_payment.created_at, member_payment.amount
+        $query = "SELECT member.name, member.image, member_payment.month, member_payment.created_at, member_payment.amount
                     FROM member_payment
                     INNER JOIN member
                     ON member_payment.member_id = member.id

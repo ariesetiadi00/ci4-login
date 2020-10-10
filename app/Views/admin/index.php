@@ -61,6 +61,7 @@
 <table class="table">
     <tr>
         <th>#</th>
+        <th>Foto</th>
         <th>Nama</th>
         <th>Deskripsi</th>
         <th>Tanggal</th>
@@ -70,6 +71,7 @@
     <?php foreach ($payment as $p) : ?>
         <tr>
             <td><?= $i++ ?></td>
+            <td><img width="30" class="rounded-circle" src="/img/profile/<?= $p['image'] ?>" alt="Profile"></td>
             <td><?= $p['name'] ?></td>
             <td>Pembayaran Bulan <?= date('F', mktime(0, 0, 0, $p['month'])) ?></td>
             <td><?= date("j F Y - g:i a", strtotime($p['created_at'])) ?></td>

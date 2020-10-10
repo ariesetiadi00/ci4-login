@@ -26,15 +26,6 @@
 
             <table class="table table-borderless">
                 <!-- Image -->
-                <tr>
-                    <td>Profile Image</td>
-                    <td>:</td>
-                    <td>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="image" id="image" placeholder="Image" required autocomplete="off" value="<?= $member['image'] ?>">
-                        </div>
-                    </td>
-                </tr>
 
                 <!-- Name -->
                 <tr>

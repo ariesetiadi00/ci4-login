@@ -60,24 +60,33 @@ class Member extends BaseController
     public function insert()
     {
         // Get Image
-        $image = $this->request->getFile('foto');
+        // $image = $this->request->getFile('foto');
         // Get Gender for checking image
         $gender = $this->request->getVar('gender');
 
         // If no image uploaded, use default image
-        if ($image->getError() == 4) {
-            if ($gender == 'm') {
-                // Male default
-                $img_name = 'd-male.png';
-            } elseif ($gender == 'f') {
-                // Female default
-                $img_name = 'd-female.png';
-            }
-        } else {
-            // File Name
-            $img_name = $image->getName();
-            // Move File to public/img
-            $image->move('img/profile');
+        // if ($image->getError() == 4) {
+        //     if ($gender == 'm') {
+        //         // Male default
+        //         $img_name = 'd-male.png';
+        //     } elseif ($gender == 'f') {
+        //         // Female default
+        //         $img_name = 'd-female.png';
+        //     }
+        // } else {
+        //     // File Name
+        //     $img_name = $image->getName();
+        //     // Move File to public/img
+        //     $image->move('img/profile');
+        // }
+
+        switch ($gender) {
+            case 'f':
+                $img_name = "d-female.png";
+                break;
+            case 'm':
+                $img_name = "d-male.png";
+                break;
         }
 
         $data = [

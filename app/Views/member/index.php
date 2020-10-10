@@ -4,7 +4,7 @@
 
 <!-- <h1>Member</h1> -->
 <div class="my-3">
-    <a href="/member/create" class="btn btn-sm btn-primary">Tambah Member</a>
+    <a href="/member/create" class="btn btn-block btn-sm btn-primary">Tambah Member</a>
 </div>
 
 <!-- Message -->
@@ -22,6 +22,7 @@
 <table class="table member">
     <tr>
         <th>#</th>
+        <th>Foto</th>
         <th>Nama</th>
         <th>Status</th>
         <th>Menu</th>
@@ -48,6 +49,7 @@
 
         <tr>
             <td class="middle-div"><?= $i++ ?></td>
+            <td class="middle-div"><img class="rounded-circle" width="30" src="/img/profile/<?= $m['image'] ?>" alt="Profile"></td>
             <td class="middle-div"><?= $m['name'] ?></td>
             <!-- <td class="badge badge-success"> -->
             <td>

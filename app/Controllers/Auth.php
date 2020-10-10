@@ -14,6 +14,17 @@ class Auth extends BaseController
     }
     public function index()
     {
+        // If session == true, go to home page
+        if (session()->get('data')) {
+            if (session()->get('data')['role_id'] == 1) {
+                // redirect to Admin
+                return redirect()->to('/admin');
+            } elseif (session()->get('data')['role_id'] == 2) {
+                // Redirect to Member
+                return redirect()->to('/user');
+            }
+        }
+
         $data = [
             'title' => 'Login',
             'validation' => \Config\Services::validation()
