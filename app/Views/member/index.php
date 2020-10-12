@@ -1,6 +1,11 @@
 <?= $this->extend('layout/template_main'); ?>
 <?= $this->section('content'); ?>
-<?php $i = 1 ?>
+<?php
+
+use App\Controllers\Member;
+
+$i = 1
+?>
 
 <!-- <h1>Member</h1> -->
 <div class="my-3">
@@ -24,6 +29,8 @@
         <th>#</th>
         <th>Foto</th>
         <th>Nama</th>
+        <th>Umur</th>
+        <th>Alamat</th>
         <th>Status</th>
         <th>Menu</th>
     </tr>
@@ -48,21 +55,27 @@
         ?>
 
         <tr>
+            <!-- No -->
             <td class="middle-div"><?= $i++ ?></td>
+            <!-- Foto -->
             <td class="middle-div"><img class="rounded-circle" width="30" src="/img/profile/<?= $m['image'] ?>" alt="Profile"></td>
+            <!-- Nama -->
             <td class="middle-div"><?= $m['name'] ?></td>
-            <!-- <td class="badge badge-success"> -->
+            <!-- Umur -->
+            <td class="middle-div"><?= Member::countAge($m['birth_date']) ?></td>
+            <!-- Alamat -->
+            <td class="middle-div"><?= $m['address'] ?></td>
+
+            <!-- Status -->
             <td>
                 <div class="btn btn-sm <?= ($data) ? 'btn-success' : 'btn-danger' ?>">
                     <?= date('F', mktime($time)) ?>
                 </div>
             </td>
+
+            <!-- Detail Button -->
             <td class="middle-div">
                 <a href="/member/detail/<?= $m['id'] ?>" class="detail-button btn btn-sm" data-id="<?= $m['id'] ?>">Detail</a>
-
-                <a href="/member/edit/<?= $m['id'] ?>" class="edit-button btn btn-sm">Ubah</a>
-
-                <a id="delete-button" href="/member/delete/<?= $m['id'] ?>" class="delete-button btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal" data-mid="<?= $m['id'] ?>">Hapus</a>
             </td>
         </tr>
     <?php endforeach; ?>

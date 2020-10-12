@@ -77,6 +77,13 @@
         </div>
         <div class="row">
             <div class="col">
+                <a href="/member/edit/<?= $member['id'] ?>" class="edit-button btn btn-sm">Ubah</a>
+
+                <a id="delete-button" href="/member/delete/<?= $member['id'] ?>" class="delete-button btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal" data-mid="<?= $member['id'] ?>">Hapus</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
 
                 <!-- Require Data
                     1. Member Debt

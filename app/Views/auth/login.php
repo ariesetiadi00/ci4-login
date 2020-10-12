@@ -47,9 +47,9 @@
                                 <br>
                                 <hr>
                                 <br>
-                                <div class="text-center">
+                                <!-- <div class="text-center">
                                     <a class="small btn" href="/auth/register">Create an Account</a>
-                                </div>
+                                </div> -->
                                 <div class="text-center">
                                     <a class="small btn" href="forgot-password.html">Forgot Password ?</a>
                                 </div>

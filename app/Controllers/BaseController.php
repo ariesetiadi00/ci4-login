@@ -31,6 +31,7 @@ class BaseController extends Controller
 	protected $helpers = ['php'];
 	protected $time;
 	protected $db;
+	protected $session;
 
 
 	/**
@@ -45,10 +46,10 @@ class BaseController extends Controller
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
 		// E.g.:
-		// $this->session = \Config\Services::session();
+		$this->session = \Config\Services::session();
 
-		// Start Session
-		session();
+		// // Start Session
+		// session();
 
 		// Initiate time class
 		$this->time = new Time();

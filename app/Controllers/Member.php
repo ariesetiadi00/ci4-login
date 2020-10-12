@@ -13,6 +13,7 @@ class Member extends BaseController
     protected $time;
     protected $user;
     public static $sdb;
+    public static $age;
 
     public function __construct()
     {
@@ -277,5 +278,12 @@ class Member extends BaseController
 
         $status = self::$sdb->query($query)->getResultArray();
         return $status;
+    }
+
+    public static function countAge($date)
+    {
+        $date = strtotime($date);
+        $current = time();
+        d($date, $current);
     }
 }
