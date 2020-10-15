@@ -282,8 +282,10 @@ class Member extends BaseController
 
     public static function countAge($date)
     {
-        $date = strtotime($date);
-        $current = time();
-        d($date, $current);
+        // Parse Date and Current
+        $date = Time::parse($date, "Asia/Shanghai");
+        $current = Time::now("Asia/Shanghai");
+
+        return $date->difference($current)->getYears();
     }
 }

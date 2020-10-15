@@ -9,7 +9,7 @@ $i = 1
 
 <!-- <h1>Member</h1> -->
 <div class="my-3">
-    <a href="/member/create" class="btn btn-block btn-sm btn-primary">Tambah Member</a>
+    <a href="/member/create" class="btn btn-block btn-sm ">Tambah Member</a>
 </div>
 
 <!-- Message -->
@@ -32,7 +32,7 @@ $i = 1
         <th>Umur</th>
         <th>Alamat</th>
         <th>Status</th>
-        <th>Menu</th>
+        <th></th>
     </tr>
 
     <!-- variable data to check payment status -->
@@ -72,11 +72,23 @@ $i = 1
                     <?= date('F', mktime($time)) ?>
                 </div>
             </td>
-
-            <!-- Detail Button -->
-            <td class="middle-div">
-                <a href="/member/detail/<?= $m['id'] ?>" class="detail-button btn btn-sm" data-id="<?= $m['id'] ?>">Detail</a>
+            <td>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Menu
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <!-- Detail -->
+                        <a href="/member/detail/<?= $m['id'] ?>" class="dropdown-item detail-button btn btn-sm" data-id="<?= $m['id'] ?>">Detail</a>
+                        <!-- Ubah -->
+                        <a href="/member/edit/<?= $m['id'] ?>" class="dropdown-item edit-button btn btn-sm">Ubah</a>
+                        <!-- Hapus -->
+                        <a id="delete-button" href="/member/delete/<?= $m['id'] ?>" class="dropdown-item delete-button btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal" data-mid="<?= $m['id'] ?>">Hapus</a>
+                    </div>
+                </div>
             </td>
+            <!-- Drop Down MEnu -->
+
         </tr>
     <?php endforeach; ?>
 </table>
