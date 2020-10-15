@@ -135,6 +135,17 @@ class Member extends BaseController
 
     public function update()
     {
+        $gender = $this->request->getVar('gender');
+
+        switch ($gender) {
+            case 'f':
+                $img_name = "d-female.png";
+                break;
+            case 'm':
+                $img_name = "d-male.png";
+                break;
+        }
+
         // Prepare array data
         $data = [
             'id' => $this->request->getVar('id'),
@@ -144,8 +155,8 @@ class Member extends BaseController
             'birth_date' => $this->request->getVar('birth_date'),
             'religion' => $this->request->getVar('religion'),
             'phone' => $this->request->getVar('phone'),
-            'gender' => $this->request->getVar('gender'),
-            'image' => $this->request->getVar('image'),
+            'gender' => $gender,
+            'image' => $img_name,
             'updated_at' => $this->time->now('Asia/Shanghai')
         ];
 

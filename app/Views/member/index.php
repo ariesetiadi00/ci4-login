@@ -8,9 +8,9 @@ $i = 1
 ?>
 
 <!-- <h1>Member</h1> -->
-<div class="my-3">
-    <a href="/member/create" class="btn btn-block btn-sm ">Tambah Member</a>
-</div>
+<!-- <div class="my-3">
+    <a href="/member/create" class="btn btn-primary btn-block btn-sm ">Tambah Member</a>
+</div> -->
 
 <!-- Message -->
 <?php if (session()->getFlashData('strong') != null) : ?>
