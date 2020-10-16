@@ -224,6 +224,7 @@
     <script src="/js/payment.js"></script>
     <script src="/js/delete.js"></script>
     <script src="/js/img-preview.js"></script>
+    <script src="/js/settings.js"></script>
 
 
 

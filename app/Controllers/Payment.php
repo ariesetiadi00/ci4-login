@@ -49,6 +49,15 @@ class Payment extends BaseController
 
     public function reset()
     {
-        echo "Reset Payment";
+        if ($this->request->getVar('kunci') != 'reset-payment') {
+            session()->setFlashData('message', 'Kata kunci Salah, Reset Data Gagal');
+            return redirect()->to('/admin/settings');
+        } else {
+            $this->db->table('member_payment')->truncate();
+
+            session()->setFlashData('message', 'Reset Data Payment Berhasil');
+
+            return redirect()->to('/admin/settings');
+        }
     }
 }

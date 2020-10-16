@@ -283,7 +283,15 @@ class Member extends BaseController
 
     public function reset()
     {
-        echo "Reset member";
-        // $this->db->table('test')->truncate();
+        if ($this->request->getVar('kunci') != 'reset-member') {
+            session()->setFlashData('message', 'Kata kunci Salah, Reset Data Gagal');
+            return redirect()->to('/admin/settings');
+        } else {
+            $this->db->table('member')->truncate();
+
+            session()->setFlashData('message', 'Reset Data Member Berhasil');
+
+            return redirect()->to('/admin/settings');
+        }
     }
 }
