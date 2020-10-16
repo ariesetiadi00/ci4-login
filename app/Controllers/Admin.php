@@ -9,11 +9,15 @@ class Admin extends BaseController
 {
     protected $userModel;
     protected $memberModel;
+    protected $user;
 
     public function __construct()
     {
         $this->memberModel = new MemberModel();
         $this->userModel = new UserModel();
+        // User Account
+        $id = session()->get('data')['user_id'];
+        $this->user = $this->userModel->find($id);
     }
 
     public function index()
@@ -59,5 +63,14 @@ class Admin extends BaseController
                     ORDER BY member_payment.created_at DESC";
 
         return $this->db->query($query)->getResultArray();
+    }
+
+    public function settings()
+    {
+        $data = [
+            'title' => 'Settings',
+            'user' => $this->user
+        ];
+        return view('admin/settings', $data);
     }
 }

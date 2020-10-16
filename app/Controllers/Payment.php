@@ -46,4 +46,9 @@ class Payment extends BaseController
         // Redirect to admin dashboard
         return redirect()->to('/admin');
     }
+
+    public function reset()
+    {
+        echo "Reset Payment";
+    }
 }
